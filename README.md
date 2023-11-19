@@ -17,7 +17,7 @@ ToDo: Define method
 pip install bakbone-learn
 ```
 
-Note: For ODT implementations, please follow the instructions described in the libary to compile CBC from source using coinbrew: https://github.com/D3M-Research-Group/odtlearn#cbc-binaries
+Note: For ODT implementations, please follow the instructions described in the libary to install compile CBC from source using coinbrew: https://github.com/D3M-Research-Group/odtlearn#cbc-binaries
 
 ### Run simulations
 ```poetry install
@@ -52,7 +52,6 @@ class CustomScreenSelector(ScreenSelectorBase):
 Next, create a subclass of HeuristicSolverBase and implement the fit, model, and get_relevant_features methods. This solver fits a model to the data using a heuristic approach and identifies relevant features.
 
 ```python
-
 class CustomHeuristicSolver(HeuristicSolverBase):
     def fit(self, X: np.ndarray, y: np.ndarray):
         # Implement logic here to fit the heuristic model
@@ -68,8 +67,6 @@ class CustomHeuristicSolver(HeuristicSolverBase):
 Create a subclass of ExactSolverBase and implement the fit, model, and predict methods. This solver fits a model using an exact or more rigorous approach and makes predictions.
 
 ```python
-from backbone_base_classes import ExactSolverBase
-
 class CustomExactSolver(ExactSolverBase):
     def fit(self, X: np.ndarray, y: np.ndarray):
         # Logic to fit the exact model
@@ -85,8 +82,6 @@ To create your own Backbone algorithm, you can inherit from the BackboneBase cla
 Here's an example of how you can assemble a custom Backbone algorithm:
 
 ```python
-from backbone_base_classes import BackboneBase
-
 class CustomBackboneAlgorithm(BackboneBase):
     def set_solvers(self, **kwargs):
         # Extract parameters specific to each solver

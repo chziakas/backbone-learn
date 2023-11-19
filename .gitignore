@@ -9,7 +9,6 @@ draft/
 
 # Distribution / packaging
 .Python
-examples/
 build/
 develop-eggs/
 dist/
