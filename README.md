@@ -14,8 +14,10 @@
 ### Installation
 ToDo: Define method
 ```bash
-pip install bakbone-learn
+pip install backbone-learn
 ```
+
+You could find some example notebooks.
 
 Note: For ODT implementations, please follow the instructions described in the libary to install compile CBC from source using coinbrew: https://github.com/D3M-Research-Group/odtlearn#cbc-binaries
 
