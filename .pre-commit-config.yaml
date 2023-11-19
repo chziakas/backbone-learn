@@ -1,0 +1,43 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+    -   id: check-byte-order-marker
+    -   id: check-merge-conflict
+    -   id: check-symlinks
+    -   id: check-toml
+    -   id: check-yaml
+    -   id: detect-private-key
+    -   id: end-of-file-fixer
+    -   id: mixed-line-ending
+    -   id: trailing-whitespace
+  - repo: https://github.com/psf/black
+    rev: 22.8.0
+    hooks:
+      - id: black
+        args: [--line-length=100, --exclude=""]
+
+  # this is not technically always safe but usually is
+  # use comments `# isort: off` and `# isort: on` to disable/re-enable isort
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        args: [--line-length=100, --profile=black]
+
+  # this is slightly dangerous because python imports have side effects
+  # and this tool removes unused imports, which may be providing
+  # necessary side effects for the code to run
+  - repo: https://github.com/PyCQA/autoflake
+    rev: v1.6.1
+    hooks:
+      - id: autoflake
+        args:
+          - "--in-place"
+          - "--expand-star-imports"
+          - "--remove-duplicate-keys"
+          - "--remove-unused-variables"
+          - "--remove-all-unused-imports"
+
+# https://github.com/openai/evals/blob/main/.pre-commit-config.yaml
+# https://github.com/run-llama/llama_index/blob/main/.pre-commit-config.yaml
