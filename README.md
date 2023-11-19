@@ -22,9 +22,9 @@ Note: For ODT implementations, please follow the instructions described in the l
 ### Run simulations
 ```poetry install
 poetry shell
-python experiments/sparse_regression_script.py 
+python experiments/sparse_regression_script.py
 python experiments/clustering_script.py
-python experiments/decision_trees_script.py 
+python experiments/decision_trees_script.py
 ```
 
 
@@ -94,7 +94,7 @@ class CustomBackboneAlgorithm(BackboneBase):
         parameter_2 = kwargs.get('parameter_2')
 
         # Initialize custom solvers with extracted parameters
-        self.screen_selector = CustomScreenSelector() 
+        self.screen_selector = CustomScreenSelector()
         self.exact_solver = CustomExactSolver(parameter_1)
         self.heuristic_solver = CustomHeuristicSolver(parameter_2)
 

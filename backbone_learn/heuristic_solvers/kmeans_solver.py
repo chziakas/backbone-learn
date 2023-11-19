@@ -37,15 +37,21 @@ class KMeansSolver(HeuristicSolverBase):
             for k in range(self.n_clusters):
                 cluster_points = []  # List to store data points assigned to the current cluster
                 if self._model.labels_[i] == k:
-                    cluster_points.append(X[i,:])
+                    cluster_points.append(X[i, :])
                 if cluster_points:
                     cluster_centers[k] = np.mean(cluster_points, axis=0)
 
         return cluster_centers
 
-
-    def fit(self, X: np.ndarray, y: np.ndarray = None, init: str = "k-means++", 
-            n_init: int = 10, max_iter: int = 300, tol: float = 0.0001, random_state: int = 0,
+    def fit(
+        self,
+        X: np.ndarray,
+        y: np.ndarray = None,
+        init: str = "k-means++",
+        n_init: int = 10,
+        max_iter: int = 300,
+        tol: float = 0.0001,
+        random_state: int = 0,
     ) -> None:
         """
         Applies KMeans clustering to the data with customizable hyperparameters.
@@ -63,8 +69,8 @@ class KMeansSolver(HeuristicSolverBase):
         # If n_clusters is not specified, use the class attribute
         self._model = KMeans(
             n_clusters=self.n_clusters,
-            init='random',
-            n_init='auto',
+            init="random",
+            n_init="auto",
             max_iter=max_iter,
             tol=tol,
             random_state=random_state,
@@ -73,7 +79,7 @@ class KMeansSolver(HeuristicSolverBase):
         self.cluster_centers = self._compute_cluster_centers(X)
         self.wcss = self._compute_wcss(X)
         self.silhouette_score = self._compute_silhouette_score(X)
-      
+
     def get_relevant_variables(self) -> List[Tuple[int, int]]:
         """
         Identifies tuples of instance indices that are not in the same cluster.
@@ -88,7 +94,6 @@ class KMeansSolver(HeuristicSolverBase):
         i_indices, j_indices = np.where(upper_triangle_mask)
         different_pairs = [(min(i, j), max(i, j)) for i, j in zip(i_indices, j_indices)]
         return different_pairs
-
 
     def _compute_wcss(self, X: np.ndarray) -> float:
         """
@@ -111,11 +116,9 @@ class KMeansSolver(HeuristicSolverBase):
 
         return wcss
 
-
     def _compute_silhouette_score(self, X: np.ndarray) -> float:
-        """
-            
-        """
+        """ """
         from sklearn.metrics import silhouette_score
+
         silhouette_avg = silhouette_score(X, self._model.labels_)
-        return(silhouette_avg)
+        return silhouette_avg

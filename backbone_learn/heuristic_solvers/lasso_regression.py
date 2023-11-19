@@ -29,7 +29,6 @@ class LassoRegression(HeuristicSolverBase):
         self._model = LassoCV()
         self._mse_score = None
 
-
     @property
     def mse_score(self) -> float:
         """

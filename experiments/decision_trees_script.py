@@ -1,5 +1,3 @@
-import json
-import os
 import time
 from itertools import product
 
@@ -7,8 +5,8 @@ from sklearn.datasets import make_classification
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
-
 from utils import save_results
+
 from backbone_learn.backbone.backbone_decision_tree import BackboneDecisionTree
 
 # Define parameter ranges for Backbone parameters
@@ -34,10 +32,17 @@ results = []
 # Experiment loop
 for n_features in n_features_range:
     # Generate synthetic classification data
-    X, y = make_classification(n_samples=n_samples, n_informative=n_informative,
-                               n_features=n_features, n_classes=n_classes, random_state=random_state)
+    X, y = make_classification(
+        n_samples=n_samples,
+        n_informative=n_informative,
+        n_features=n_features,
+        n_classes=n_classes,
+        random_state=random_state,
+    )
     # Split data into train and test sets
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=random_state)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=random_state
+    )
 
     for depth, _lambda in product(depth_range, _lambda_range):
         # CARTDecisionTree model iteration for heuristic_model
@@ -58,7 +63,9 @@ for n_features in n_features_range:
         results.append(result_heuristic)
 
         # BackboneDecisionTree model iterations for 'exact' solution
-        exact_model = BackboneDecisionTree(depth=depth, _lambda=_lambda, time_limit=time_limit, n_bins=n_bins)
+        exact_model = BackboneDecisionTree(
+            depth=depth, _lambda=_lambda, time_limit=time_limit, n_bins=n_bins
+        )
         start_time = time.time()
         exact_model.fit(X_train, y_train)
         runtime = time.time() - start_time
@@ -78,7 +85,9 @@ for n_features in n_features_range:
         results.append(result_exact)
 
         # BackboneDecisionTree model iterations for 'backbone' solution
-        for alpha, beta, num_subproblems, num_iterations in product(alpha_range, beta_range, num_subproblems_range, num_iterations_range):
+        for alpha, beta, num_subproblems, num_iterations in product(
+            alpha_range, beta_range, num_subproblems_range, num_iterations_range
+        ):
             backbone_model = BackboneDecisionTree(
                 alpha=alpha,
                 beta=beta,
@@ -87,7 +96,7 @@ for n_features in n_features_range:
                 depth=depth,
                 time_limit=time_limit,
                 threshold=0.001,
-                n_bins=n_bins
+                n_bins=n_bins,
             )
             start_time = time.time()
             backbone_model.fit(X_train, y_train)
@@ -96,7 +105,7 @@ for n_features in n_features_range:
             auc_score_backbone = roc_auc_score(y_test, y_pred_backbone)
 
             # Record backbone model results
-             # Record backbone model results
+            # Record backbone model results
             result_backbone = {
                 "model_name": "backbone",
                 "n_features": int(n_features * n_bins),

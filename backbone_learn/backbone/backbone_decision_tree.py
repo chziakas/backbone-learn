@@ -15,7 +15,14 @@ class BackboneDecisionTree(BackboneSupervised):
     """
 
     def set_solvers(
-        self, alpha=0.5, depth=3, time_limit=1000, _lambda=0.5, num_threads=None, obj_mode="acc", n_bins=2
+        self,
+        alpha=0.5,
+        depth=3,
+        time_limit=1000,
+        _lambda=0.5,
+        num_threads=None,
+        obj_mode="acc",
+        n_bins=2,
     ):
         """
         Initializes the sparse regression method with specified components.
@@ -36,6 +43,6 @@ class BackboneDecisionTree(BackboneSupervised):
             _lambda=_lambda,
             num_threads=num_threads,
             obj_mode=obj_mode,
-            n_bins=n_bins
+            n_bins=n_bins,
         )
         self.heuristic_solver = CARTDecisionTree()

@@ -1,13 +1,11 @@
-import json
-import os
 import time
 from itertools import product
 
 from sklearn.datasets import make_blobs
+from utils import save_results
 
 from backbone_learn.backbone.backbone_clustering import BackboneClustering
 from backbone_learn.heuristic_solvers.kmeans_solver import KMeansSolver
-from utils import save_results, load_results
 
 # Define parameter ranges for BackboneClustering
 beta_range = [1.0]
@@ -25,9 +23,13 @@ log_filename = "clustering_results.json"
 
 results = []
 # Experiment loop
-for n_samples, n_clusters, n_features in product(n_samples_range, n_clusters_range, n_features_range):
+for n_samples, n_clusters, n_features in product(
+    n_samples_range, n_clusters_range, n_features_range
+):
     # Generate synthetic data
-    X, _ = make_blobs(n_samples=n_samples, centers=n_clusters, n_features=n_features, random_state=random_state)
+    X, _ = make_blobs(
+        n_samples=n_samples, centers=n_clusters, n_features=n_features, random_state=random_state
+    )
 
     # KMeansSolver model iteration (labeled as 'heuristic')
     heuristic_model = KMeansSolver(n_clusters=n_clusters)
@@ -69,12 +71,13 @@ for n_samples, n_clusters, n_features in product(n_samples_range, n_clusters_ran
         "silhouette": exact_silhouette,
         "Runtime (seconds)": exact_runtime,
     }
- 
+
     results.append(result_exact)
-    
 
     # BackboneClustering model iterations for 'backbone' solvers
-    for beta, num_subproblems, num_iterations in product(beta_range, num_subproblems_range, num_iterations_range):
+    for beta, num_subproblems, num_iterations in product(
+        beta_range, num_subproblems_range, num_iterations_range
+    ):
         backbone_model = BackboneClustering(
             beta=beta,
             num_subproblems=num_subproblems,
@@ -109,4 +112,3 @@ for n_samples, n_clusters, n_features in product(n_samples_range, n_clusters_ran
 
 save_results(results, log_filename)
 # Print or further process results
-

@@ -37,14 +37,25 @@ class MIOClustering:
         Returns:
             Tuple: A tuple containing the dictionaries of z and y variables.
         """
-        z = LpVariable.dicts("z",[
-            (i, j, k) for i in range(num_points - 1) for j in range(i + 1, num_points) for k in range(self.n_clusters)
-            ],0,1,LpBinary,
+        z = LpVariable.dicts(
+            "z",
+            [
+                (i, j, k)
+                for i in range(num_points - 1)
+                for j in range(i + 1, num_points)
+                for k in range(self.n_clusters)
+            ],
+            0,
+            1,
+            LpBinary,
         )
 
-        y = LpVariable.dicts("y",
-                [(i, k) for i in range(num_points) for k in range(self.n_clusters)
-            ],0, 1, LpBinary,
+        y = LpVariable.dicts(
+            "y",
+            [(i, k) for i in range(num_points) for k in range(self.n_clusters)],
+            0,
+            1,
+            LpBinary,
         )
 
         return z, y
@@ -63,10 +74,10 @@ class MIOClustering:
         min_dist = np.min(distances[np.nonzero(distances)])
         noise = 0.1 * min_dist * (2 * np.random.rand(X.shape[0], X.shape[0], self.n_clusters) - 1)
         return distances[:, :, np.newaxis] + noise
-    
+
     def _calculate_distances(self, X: np.ndarray) -> np.ndarray:
         """
-        Calculate and return the matrix of pairwise distances 
+        Calculate and return the matrix of pairwise distances
 
         Args:
             X (np.ndarray): The input feature matrix.
@@ -97,7 +108,7 @@ class MIOClustering:
                 for k in range(self.n_clusters):
                     z_opt[i, j, k].setInitialValue(0)
                     z_opt[i, j, k].fixValue()
-        
+
         self.model += lpSum(
             z_opt[i, j, k] * coef[i, j, k]
             for i in range(num_points - 1)
@@ -120,8 +131,6 @@ class MIOClustering:
                     self.model += z_opt[i, j, k] <= y_opt[i, k]
                     self.model += z_opt[i, j, k] <= y_opt[j, k]
                     self.model += z_opt[i, j, k] >= y_opt[i, k] + y_opt[j, k] - 1
-
-       
 
         # Exclusion constraints
         if self.constraints:
@@ -181,25 +190,35 @@ class MIOClustering:
         for v in self.model.variables():
             var_value = v.varValue
             var_name = v.name
-            if var_name.startswith('y_'):
+            if var_name.startswith("y_"):
                 # Parse the indices for y
-                i, k = var_name.replace('(', '').replace(')', '').replace('y_', '').replace(',', '').split('_')
+                i, k = (
+                    var_name.replace("(", "")
+                    .replace(")", "")
+                    .replace("y_", "")
+                    .replace(",", "")
+                    .split("_")
+                )
                 i, k = int(i), int(k)
                 self.y[i, k] = var_value
-            elif var_name.startswith('z_'):
+            elif var_name.startswith("z_"):
                 # Parse the indices for z
-                i, j, k = var_name.replace('(', '').replace(')', '').replace('z_', '').replace(',', '').split('_')
+                i, j, k = (
+                    var_name.replace("(", "")
+                    .replace(")", "")
+                    .replace("z_", "")
+                    .replace(",", "")
+                    .split("_")
+                )
                 i, j, k = int(i), int(j), int(k)
-                self.z[i,j,k] = var_value
-                
+                self.z[i, j, k] = var_value
 
         # Extract and store cluster means
-        self.labels = self._get_cluster_assingments(X.shape[0]) 
+        self.labels = self._get_cluster_assingments(X.shape[0])
         self.cluster_centers = self._compute_cluster_centers(X)
         self.wcss = self._compute_wcss(X)
         self.silhouette_score = self._compute_silhouette_score(X)
 
-    
     def _get_cluster_assingments(self, n_rows: int) -> np.ndarray:
         """
         Predict cluster assignments for new data points based on stored cluster means.
@@ -213,7 +232,7 @@ class MIOClustering:
         cluster_assignments = np.zeros(n_rows, dtype=int)
 
         for i in range(n_rows):
-            cluster_assignments[i] = np.argmax(self.y[i,:]) #np.argmin(distances)
+            cluster_assignments[i] = np.argmax(self.y[i, :])  # np.argmin(distances)
         return cluster_assignments
 
     def _compute_wcss(self, X: np.ndarray) -> float:
@@ -229,8 +248,7 @@ class MIOClustering:
         Raises:
             ValueError: If the model has not been fitted yet or if cluster means are not available.
         """
-       
-     
+
         wcss = 0.0
         cluster_labels_pred = self.labels
 
@@ -238,7 +256,7 @@ class MIOClustering:
             cluster_points = X[cluster_labels_pred == cluster_idx]
             wcss += np.sum((cluster_points - self.cluster_centers[cluster_idx]) ** 2)
         return wcss
-        
+
     def _compute_cluster_centers(self, X: np.ndarray) -> np.ndarray:
         """
         Extract cluster means after fitting the model.
@@ -255,21 +273,19 @@ class MIOClustering:
             for k in range(self.n_clusters):
                 cluster_points = []  # List to store data points assigned to the current cluster
                 if self.labels[i] == k:
-                    cluster_points.append(X[i,:])
+                    cluster_points.append(X[i, :])
                 if cluster_points:
                     cluster_centers[k] = np.mean(cluster_points, axis=0)
 
         return cluster_centers
 
     def _compute_silhouette_score(self, X: np.ndarray) -> float:
-        """
-            
-        """
+        """ """
         from sklearn.metrics import silhouette_score
+
         silhouette_avg = silhouette_score(X, self.labels)
-        return(silhouette_avg)
-        
-    
+        return silhouette_avg
+
     def predict(self, X: np.ndarray) -> np.ndarray:
         """
         Predict cluster assignments for new data points based on stored cluster means.

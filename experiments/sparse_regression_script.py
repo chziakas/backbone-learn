@@ -1,13 +1,11 @@
-import json
-import os
 import time
 from itertools import product
 
 from l0bnb import gen_synthetic
 from sklearn.metrics import r2_score
 from sklearn.model_selection import train_test_split
-
 from utils import save_results
+
 from backbone_learn.backbone.backbone_sparse_regression import BackboneSparseRegression
 from backbone_learn.heuristic_solvers.lasso_regression import LassoRegression
 

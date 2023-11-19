@@ -1,7 +1,9 @@
 import numpy as np
-from sklearn.preprocessing import KBinsDiscretizer, OneHotEncoder
 from odtlearn.flow_oct import BendersOCT
+from sklearn.preprocessing import KBinsDiscretizer, OneHotEncoder
+
 from .exact_solver_base import ExactSolverBase
+
 
 class BendersOCTDecisionTree(ExactSolverBase):
     """
@@ -14,7 +16,9 @@ class BendersOCTDecisionTree(ExactSolverBase):
         enc (OneHotEncoder): The OneHotEncoder instance for encoding categorical variables.
     """
 
-    def __init__(self, depth=3, time_limit=1000, _lambda=0.5, num_threads=None, obj_mode="acc", n_bins=2):
+    def __init__(
+        self, depth=3, time_limit=1000, _lambda=0.5, num_threads=None, obj_mode="acc", n_bins=2
+    ):
         """
         Initializes the BendersOCTDecisionTree with default or specified values.
 

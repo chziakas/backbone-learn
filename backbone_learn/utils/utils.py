@@ -76,4 +76,3 @@ class Utils:
         merged_list = list(set(item for sublist in list_of_lists for item in sublist))
         merged_list.sort()
         return merged_list
-
