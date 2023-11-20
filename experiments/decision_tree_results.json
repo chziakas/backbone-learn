@@ -3,7 +3,7 @@
         "model_name": "heuristic",
         "n_features": 8,
         "AUC Score": 0.9545454545454545,
-        "Runtime (seconds)": 0.001132965087890625
+        "Runtime (seconds)": 0.0018589496612548828
     },
     {
         "model_name": "exact",
@@ -12,7 +12,7 @@
         "depth": 2,
         "_lambda": 0.0,
         "AUC Score": 0.8535353535353534,
-        "Runtime (seconds)": 2.857226848602295
+        "Runtime (seconds)": 3.3809118270874023
     },
     {
         "model_name": "backbone",
@@ -25,7 +25,7 @@
         "depth": 2,
         "_lambda": 0.0,
         "AUC Score": 0.8535353535353534,
-        "Runtime (seconds)": 1.2970077991485596
+        "Runtime (seconds)": 1.5547943115234375
     },
     {
         "model_name": "backbone",
@@ -38,7 +38,7 @@
         "depth": 2,
         "_lambda": 0.0,
         "AUC Score": 0.8535353535353534,
-        "Runtime (seconds)": 1.3222708702087402
+        "Runtime (seconds)": 1.7191119194030762
     },
     {
         "model_name": "backbone",
@@ -51,7 +51,7 @@
         "depth": 2,
         "_lambda": 0.0,
         "AUC Score": 0.9545454545454545,
-        "Runtime (seconds)": 0.8452091217041016
+        "Runtime (seconds)": 0.9793047904968262
     },
     {
         "model_name": "backbone",
@@ -64,13 +64,13 @@
         "depth": 2,
         "_lambda": 0.0,
         "AUC Score": 0.9545454545454545,
-        "Runtime (seconds)": 0.8207550048828125
+        "Runtime (seconds)": 0.9973418712615967
     },
     {
         "model_name": "heuristic",
         "n_features": 8,
         "AUC Score": 0.9545454545454545,
-        "Runtime (seconds)": 0.00026988983154296875
+        "Runtime (seconds)": 0.0003311634063720703
     },
     {
         "model_name": "exact",
@@ -79,7 +79,7 @@
         "depth": 2,
         "_lambda": 0.5,
         "AUC Score": 0.9545454545454545,
-        "Runtime (seconds)": 2.8575007915496826
+        "Runtime (seconds)": 3.503391981124878
     },
     {
         "model_name": "backbone",
@@ -92,7 +92,7 @@
         "depth": 2,
         "_lambda": 0.5,
         "AUC Score": 0.8535353535353534,
-        "Runtime (seconds)": 1.27543306350708
+        "Runtime (seconds)": 1.6062440872192383
     },
     {
         "model_name": "backbone",
@@ -105,7 +105,7 @@
         "depth": 2,
         "_lambda": 0.5,
         "AUC Score": 0.8535353535353534,
-        "Runtime (seconds)": 1.2794842720031738
+        "Runtime (seconds)": 1.570967197418213
     },
     {
         "model_name": "backbone",
@@ -118,7 +118,7 @@
         "depth": 2,
         "_lambda": 0.5,
         "AUC Score": 0.9545454545454545,
-        "Runtime (seconds)": 0.8113970756530762
+        "Runtime (seconds)": 0.9957339763641357
     },
     {
         "model_name": "backbone",
@@ -131,6 +131,6 @@
         "depth": 2,
         "_lambda": 0.5,
         "AUC Score": 0.9545454545454545,
-        "Runtime (seconds)": 0.812795877456665
+        "Runtime (seconds)": 1.0298030376434326
     }
 ]

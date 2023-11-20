@@ -9,10 +9,10 @@ from backbone_learn.heuristic_solvers.kmeans_solver import KMeansSolver
 
 # Define parameter ranges for BackboneClustering
 beta_range = [1.0]
-num_subproblems_range = [1]
+num_subproblems_range = [1, 2]
 num_iterations_range = [1]
-n_clusters_range = [2]
-n_features_range = [3]
+n_clusters_range = [2, 3]
+n_features_range = [3, 20]
 n_samples_range = [20]
 
 # Constants
@@ -108,7 +108,8 @@ for n_samples, n_clusters, n_features in product(
             "Runtime (seconds)": backbone_runtime,
         }
         results.append(result_backbone)
-        save_results(result_backbone, log_filename)
 
 save_results(results, log_filename)
 # Print or further process results
+for result in results:
+    print(result)

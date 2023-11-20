@@ -2,6 +2,7 @@ from typing import List, Tuple
 
 import numpy as np
 
+from ..utils.utils import Utils
 from .backbone_base import BackboneBase
 
 
@@ -84,3 +85,16 @@ class BackboneUnsupervised(BackboneBase):
         """
         rel_variables_local = self.heuristic_solver.get_relevant_variables()
         return rel_variables_local
+
+    def build_backbone_set(self, backbone_sets) -> List:
+        """
+        Find tuples that are common to all backbone sets
+
+        Args:
+            backbone_sets (list of list of int): The list of lists of backbone sets
+
+        Returns:
+            list: A backbone set with the tuples
+        """
+
+        return Utils.find_common_tuples(backbone_sets)

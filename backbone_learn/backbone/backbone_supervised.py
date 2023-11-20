@@ -2,6 +2,7 @@ from typing import List
 
 import numpy as np
 
+from ..utils.utils import Utils
 from .backbone_base import BackboneBase
 
 
@@ -85,3 +86,16 @@ class BackboneSupervised(BackboneBase):
 
         # Return the global indices of the relevant variables
         return [feature_idx[idx] for idx in rel_variables_local]
+
+    def build_backbone_set(self, backbone_sets):
+        """
+        Merges a list of backbone sets into a single list, removes duplicates, and sorts the backbone list.
+
+        Args:
+            backbone_sets (list of list of int): The list of lists of backbone sets
+
+        Returns:
+            list: A backbone set sorted with unique elements.
+        """
+
+        return Utils.merge_lists_and_sort(backbone_sets)

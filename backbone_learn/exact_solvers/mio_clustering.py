@@ -136,7 +136,6 @@ class MIOClustering:
         if self.constraints:
             for (i, j) in self.constraints:
                 for k in range(self.n_clusters):
-                    self.model += z_opt[min(i, j), max(i, j), k] == 0
                     self.model += y_opt[i, k] + y_opt[j, k] <= 1
 
     def extract_cluster_means(self, X: np.ndarray) -> np.ndarray:
@@ -179,7 +178,7 @@ class MIOClustering:
 
         self._add_constraints(num_points, self.z, self.y, coef, b)
 
-        solver = PULP_CBC_CMD(timeLimit=self.time_limit)
+        solver = PULP_CBC_CMD(timeLimit=self.time_limit, warmStart=True)
 
         # Solve the problem
         self.model.solve(solver)

@@ -4,7 +4,6 @@ from typing import List, Tuple
 
 import numpy as np
 
-from ..utils.utils import Utils
 from .subproblem_costructor import SubproblemConstructor
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -173,7 +172,7 @@ class BackboneBase(ABC):
                 rel_variables_global = self.get_relevant_variables(feature_idx, self.threshold)
                 backbone_sets.append(rel_variables_global)
             logging.info(f"Iteration {iter + 1} completed.")
-        backbone_set = Utils.merge_lists_and_sort(backbone_sets)
+        backbone_set = self.build_backbone_set(backbone_sets)
         if self.screen_selector is None:
             logging.info(f"Backbone set idx: {backbone_set}")
         else:

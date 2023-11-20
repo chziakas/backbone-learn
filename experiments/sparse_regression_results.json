@@ -1,0 +1,63 @@
+[
+    {
+        "model_name": "heuristic",
+        "n_features": 100,
+        "R2 Score": 0.8566668453821507,
+        "Runtime (seconds)": 0.12690424919128418
+    },
+    {
+        "model_name": "exact",
+        "n_features": 100,
+        "lambda_2": 0.01,
+        "R2 Score": 0.9075001435857172,
+        "Runtime (seconds)": 0.47080516815185547
+    },
+    {
+        "model_name": "backbone",
+        "n_features": 100,
+        "backbone_size": 10,
+        "alpha": 0.1,
+        "beta": 0.9,
+        "num_subproblems": 2,
+        "num_iterations": 1,
+        "lambda_2": 0.01,
+        "R2 Score": 0.9025244668282516,
+        "Runtime (seconds)": 0.08208107948303223
+    },
+    {
+        "model_name": "backbone",
+        "n_features": 100,
+        "backbone_size": 10,
+        "alpha": 0.1,
+        "beta": 0.9,
+        "num_subproblems": 5,
+        "num_iterations": 1,
+        "lambda_2": 0.01,
+        "R2 Score": 0.9025244668282516,
+        "Runtime (seconds)": 0.16637682914733887
+    },
+    {
+        "model_name": "backbone",
+        "n_features": 100,
+        "backbone_size": 18,
+        "alpha": 0.5,
+        "beta": 0.9,
+        "num_subproblems": 2,
+        "num_iterations": 1,
+        "lambda_2": 0.01,
+        "R2 Score": 0.6936823962026885,
+        "Runtime (seconds)": 0.3860297203063965
+    },
+    {
+        "model_name": "backbone",
+        "n_features": 100,
+        "backbone_size": 11,
+        "alpha": 0.5,
+        "beta": 0.9,
+        "num_subproblems": 5,
+        "num_iterations": 1,
+        "lambda_2": 0.01,
+        "R2 Score": 0.9025244668282516,
+        "Runtime (seconds)": 0.18602800369262695
+    }
+]

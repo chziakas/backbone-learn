@@ -76,3 +76,23 @@ class Utils:
         merged_list = list(set(item for sublist in list_of_lists for item in sublist))
         merged_list.sort()
         return merged_list
+
+    @staticmethod
+    def find_common_tuples(list_of_lists):
+        """
+        Find tuples that are common to all sublists within a given list of lists.
+
+        Parameters:
+        list_of_lists (list of list of tuples): A list containing sublists, where each sublist contains tuples.
+
+        Returns:
+        list: A list of tuples that are common to all sublists.
+        """
+        if not list_of_lists or not all(list_of_lists):
+            return []
+        # Find common tuples by intersecting all sublists
+        common_tuples = set(list_of_lists[0])
+        for sublist in list_of_lists[1:]:
+            common_tuples.intersection_update(sublist)
+
+        return list(common_tuples)

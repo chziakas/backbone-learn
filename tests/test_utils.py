@@ -70,3 +70,17 @@ def test_merge_lists_and_sort():
     input_lists = [[(1, 2), (3, 4)], [(3, 4), (5, 6)], [(1, 2)]]
     expected_output = [(1, 2), (3, 4), (5, 6)]
     assert Utils.merge_lists_and_sort(input_lists) == expected_output
+
+
+def test_find_common_tuples():
+    assert Utils.find_common_tuples([[(1, 2), (1, 3)], [(2, 3), (1, 3)], [(1, 3), (4, 5)]]) == [
+        (1, 3)
+    ], "Test with three sublists failed"
+    assert (
+        Utils.find_common_tuples([[(1, 2), (3, 4)], [(5, 6)], [(7, 8)]]) == []
+    ), "Test with no common tuples failed"
+    assert Utils.find_common_tuples([[(1, 2), (3, 4)], [(1, 2), (4, 5)], [(1, 2), (5, 6)]]) == [
+        (1, 2)
+    ], "Test with common tuple in all lists failed"
+    assert Utils.find_common_tuples([]) == [], "Test with empty list failed"
+    assert Utils.find_common_tuples([[]]) == [], "Test with single empty sublist failed"
