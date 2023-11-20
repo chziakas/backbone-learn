@@ -9,7 +9,7 @@ from backbone_learn.heuristic_solvers.kmeans_solver import KMeansSolver
 
 # Define parameter ranges for BackboneClustering
 beta_range = [1.0]
-num_subproblems_range = [1, 2]
+num_subproblems_range = [1, 2, 5]
 num_iterations_range = [1]
 n_clusters_range = [2, 3]
 n_features_range = [3, 20]

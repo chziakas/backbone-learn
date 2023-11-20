@@ -84,3 +84,15 @@ def test_find_common_tuples():
     ], "Test with common tuple in all lists failed"
     assert Utils.find_common_tuples([]) == [], "Test with empty list failed"
     assert Utils.find_common_tuples([[]]) == [], "Test with single empty sublist failed"
+
+
+def test_generate_index_pairs():
+    # Test case with specific inputs
+    total_points = 4
+    excluded_pairs = [(0, 2), (1, 3)]
+
+    # Expected output
+    expected_output = [(0, 1), (0, 3), (1, 2), (2, 3)]
+
+    # Asserting if the function output matches the expected output
+    assert Utils.generate_index_pairs(total_points, excluded_pairs) == expected_output

@@ -12,7 +12,7 @@ class HeuristicSolverBase(ABC):
     """
 
     @abstractmethod
-    def fit(self, X: np.ndarray, y: np.ndarray):
+    def fit(self, X: np.ndarray, y: np.ndarray, random_state: int):
         """
         Fits a model to the given data using a heuristic approach.
 
@@ -22,6 +22,7 @@ class HeuristicSolverBase(ABC):
         Args:
             X (np.ndarray): The input feature matrix.
             y (np.ndarray): The target vector.
+            random_state (int): The seed used by the random number generator. Default is 0.
 
         Returns:
             None: The method should fit the model to the data, with the results stored internally within the class instance.

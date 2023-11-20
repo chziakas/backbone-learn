@@ -32,7 +32,7 @@ class CARTDecisionTree(HeuristicSolverBase):
         """
         return self._auc_score
 
-    def fit(self, X: np.ndarray, y: np.ndarray, cv_folds: int = 5) -> None:
+    def fit(self, X: np.ndarray, y: np.ndarray, cv_folds: int = 5, random_state: int = 0) -> None:
         """
         Fits a CART Decision Tree model to the data using hyperparameter tuning with cross-validation and evaluates it using AUC.
 
@@ -40,7 +40,9 @@ class CARTDecisionTree(HeuristicSolverBase):
             X (np.ndarray): The input features as a NumPy array.
             y (np.ndarray): The target labels as a NumPy array.
             cv_folds (int): The number of folds to use for cross-validation.
+
         """
+        self._model.set_params(random_state=random_state)
         # Define the parameter grid for hyperparameter tuning
         param_grid = {"max_depth": [None, 5, 10, 20], "min_samples_leaf": [1, 2, 4]}
 

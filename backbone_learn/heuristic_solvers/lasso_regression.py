@@ -18,13 +18,12 @@ class LassoRegression(HeuristicSolverBase):
         _mse_score (float): The mean squared error score of the trained model.
     """
 
-    def __init__(self, random_state=0, **kwargs):
+    def __init__(self, **kwargs):
         """
         Initializes the LassoRegression with specified cross-validation folds and random state.
 
         Args:
             cv_folds (int): The number of cross-validation folds to use. Default is 5.
-            random_state (int): The seed used by the random number generator. Default is 0.
         """
         self._model = LassoCV()
         self._mse_score = None

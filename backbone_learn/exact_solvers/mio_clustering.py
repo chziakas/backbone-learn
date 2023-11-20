@@ -13,10 +13,12 @@ class MIOClustering:
         self,
         n_clusters: int = None,
         time_limit: float = 1200,
-        constraints: Optional[List[Tuple[int, int]]] = None,
+        ls_pairs_diff_cluster: Optional[List[Tuple[int, int]]] = None,
+        ls_pairs_same_cluster: Optional[List[Tuple[int, int]]] = None,
     ):
         self.n_clusters = n_clusters
-        self.constraints = constraints
+        self.ls_pairs_diff_cluster = ls_pairs_diff_cluster
+        self.ls_pairs_same_cluster = ls_pairs_same_cluster
         self.time_limit = time_limit
         self.model = LpProblem("Clustering MIO", LpMinimize)
         self.z = None  # For storing solution for z variables
@@ -103,8 +105,8 @@ class MIOClustering:
 
         z_opt, y_opt = self._initialize_variables(num_points)
 
-        if self.constraints:
-            for (i, j) in self.constraints:
+        if self.ls_pairs_diff_cluster:
+            for (i, j) in self.ls_pairs_diff_cluster:
                 for k in range(self.n_clusters):
                     z_opt[i, j, k].setInitialValue(0)
                     z_opt[i, j, k].fixValue()
@@ -133,10 +135,16 @@ class MIOClustering:
                     self.model += z_opt[i, j, k] >= y_opt[i, k] + y_opt[j, k] - 1
 
         # Exclusion constraints
-        if self.constraints:
-            for (i, j) in self.constraints:
+        if self.ls_pairs_diff_cluster:
+            for (i, j) in self.ls_pairs_diff_cluster:
                 for k in range(self.n_clusters):
                     self.model += y_opt[i, k] + y_opt[j, k] <= 1
+
+        # Inclusion constraints
+        if self.ls_pairs_same_cluster:
+            for (i, j) in self.ls_pairs_same_cluster:
+                for k in range(self.n_clusters):
+                    self.model += y_opt[i, k] - y_opt[j, k] == 0
 
     def extract_cluster_means(self, X: np.ndarray) -> np.ndarray:
         """

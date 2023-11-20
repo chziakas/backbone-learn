@@ -23,7 +23,7 @@ def test_backbone_clustering(sample_data):
     assert backbone_model.heuristic_solver is not None
 
     # Test constraints are applied
-    for (i, j) in backbone_model.exact_solver.constraints:
+    for (i, j) in backbone_model.exact_solver.ls_pairs_diff_cluster:
         for k in range(n_clusters):
             y_sum = backbone_model.exact_solver.y[i, k] + backbone_model.exact_solver.y[j, k]
             assert y_sum < 2

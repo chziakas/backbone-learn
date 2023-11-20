@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "backbone-learn"
-version = "0.1.0"
+version = "0.1.1"
 description = "A framework for scaling sparse and interpretable supervised and unsupervised ML methods to high-dimensional problems."
 authors = ["Christos Ziakas, Vassilis Digalakis Jr."]
 readme = "README.md"

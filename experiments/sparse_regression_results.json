@@ -3,14 +3,14 @@
         "model_name": "heuristic",
         "n_features": 100,
         "R2 Score": 0.8566668453821507,
-        "Runtime (seconds)": 0.12690424919128418
+        "Runtime (seconds)": 0.10487794876098633
     },
     {
         "model_name": "exact",
         "n_features": 100,
         "lambda_2": 0.01,
         "R2 Score": 0.9075001435857172,
-        "Runtime (seconds)": 0.47080516815185547
+        "Runtime (seconds)": 0.3770320415496826
     },
     {
         "model_name": "backbone",
@@ -22,7 +22,7 @@
         "num_iterations": 1,
         "lambda_2": 0.01,
         "R2 Score": 0.9025244668282516,
-        "Runtime (seconds)": 0.08208107948303223
+        "Runtime (seconds)": 0.06270003318786621
     },
     {
         "model_name": "backbone",
@@ -34,7 +34,7 @@
         "num_iterations": 1,
         "lambda_2": 0.01,
         "R2 Score": 0.9025244668282516,
-        "Runtime (seconds)": 0.16637682914733887
+        "Runtime (seconds)": 0.13121509552001953
     },
     {
         "model_name": "backbone",
@@ -46,7 +46,7 @@
         "num_iterations": 1,
         "lambda_2": 0.01,
         "R2 Score": 0.6936823962026885,
-        "Runtime (seconds)": 0.3860297203063965
+        "Runtime (seconds)": 0.2946901321411133
     },
     {
         "model_name": "backbone",
@@ -58,6 +58,6 @@
         "num_iterations": 1,
         "lambda_2": 0.01,
         "R2 Score": 0.9025244668282516,
-        "Runtime (seconds)": 0.18602800369262695
+        "Runtime (seconds)": 0.144395112991333
     }
 ]

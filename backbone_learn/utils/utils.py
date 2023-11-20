@@ -96,3 +96,22 @@ class Utils:
             common_tuples.intersection_update(sublist)
 
         return list(common_tuples)
+
+    @staticmethod
+    def generate_index_pairs(total_points, excluded_pairs):
+        """
+        Generate a list of index pairs from a range of points, excluding specific pairs.
+
+        Parameters:
+        total_points (int): The total number of points to consider for generating index pairs.
+        excluded_pairs (list of tuples): A list of index pairs to be excluded from the generated pairs.
+
+        Returns:
+        list: A list of tuples, each representing a pair of indices that are not in the excluded pairs.
+        """
+        index_pairs = []
+        for i in range(total_points - 1):
+            for j in range(i + 1, total_points):
+                if (i, j) not in excluded_pairs:
+                    index_pairs.append((i, j))
+        return index_pairs

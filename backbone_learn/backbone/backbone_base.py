@@ -49,6 +49,7 @@ class BackboneBase(ABC):
         self.exact_solver = None
         self.heuristic_solver = None
         self.variables_exact_idx = None
+        self.n_samples_backbone = None
         self.init_parameters = kwargs
         self.set_solvers(**kwargs)
 
@@ -163,12 +164,13 @@ class BackboneBase(ABC):
             logging.info(f"Iteration {iter + 1} started.")
             constructor = SubproblemConstructor(utilities, self.beta, self.num_subproblems)
             subproblems = constructor.construct_subproblems()
-            for feature_idx in subproblems:
+            for sub, feature_idx in enumerate(subproblems):
                 feature_idx.sort()
                 subset = X_selected[:, feature_idx]
+                self.n_samples_backbone = subset.shape[0]
                 self.heuristic_solver.__init__(**self.init_parameters)
                 subset = self.preprocessing_backbone(subset)
-                self.heuristic_solver.fit(subset, y)
+                self.heuristic_solver.fit(subset, y, random_state=sub)
                 rel_variables_global = self.get_relevant_variables(feature_idx, self.threshold)
                 backbone_sets.append(rel_variables_global)
             logging.info(f"Iteration {iter + 1} completed.")

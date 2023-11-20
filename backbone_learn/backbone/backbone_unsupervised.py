@@ -51,7 +51,7 @@ class BackboneUnsupervised(BackboneBase):
             np.ndarray: Dataset with all features, as variable selection is typically not performed in unsupervised learning.
         """
         if self.heuristic_solver is not None:
-            self.exact_solver.constraints = variables_exact_idx
+            self.exact_solver.ls_pairs_diff_cluster = variables_exact_idx
         return X_selected
 
     def preprocessing_predict(self, X: np.ndarray) -> np.ndarray:
@@ -96,5 +96,10 @@ class BackboneUnsupervised(BackboneBase):
         Returns:
             list: A backbone set with the tuples
         """
+        excluded_pairs = Utils.merge_lists_and_sort(backbone_sets)
+        num_points = self.n_samples_backbone
+        self.exact_solver.ls_pairs_same_cluster = Utils.generate_index_pairs(
+            num_points, excluded_pairs
+        )
 
         return Utils.find_common_tuples(backbone_sets)

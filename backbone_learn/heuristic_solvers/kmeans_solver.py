@@ -1,5 +1,4 @@
-import random
-from typing import List, Optional, Tuple
+from typing import List, Tuple
 
 import numpy as np
 from sklearn.cluster import KMeans
@@ -19,7 +18,7 @@ class KMeansSolver(HeuristicSolverBase):
             n_clusters (int): The number of clusters to form.
         """
         self.n_clusters: int = n_clusters
-        self._model: Optional[KMeans] = None
+        self._model = KMeans()
         self.wcss = None
 
     def _compute_cluster_centers(self, X: np.ndarray) -> np.ndarray:
@@ -52,7 +51,7 @@ class KMeansSolver(HeuristicSolverBase):
         n_init: int = 10,
         max_iter: int = 300,
         tol: float = 0.0001,
-        random_state: int = -1,
+        random_state: int = 0,
     ) -> None:
         """
         Applies KMeans clustering to the data with customizable hyperparameters.
@@ -68,10 +67,7 @@ class KMeansSolver(HeuristicSolverBase):
         if X.shape[0] < self.n_clusters:
             self.n_clusters = X.shape[0]
 
-        if random_state == -1:
-            random_state = random.randint(1, 100)
-        # If n_clusters is not specified, use the class attribute
-        self._model = KMeans(
+        self._model.set_params(
             n_clusters=self.n_clusters,
             init="random",
             n_init="auto",
