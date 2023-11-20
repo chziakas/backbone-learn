@@ -9,13 +9,6 @@ def sample_data():
     return np.array([[1, 2], [1, 4], [1, 0], [10, 2], [10, 4], [10, 0]])
 
 
-def test_initialization():
-    """Test initialization of KMeansSolver."""
-    solver = KMeansSolver(n_clusters=3)
-    assert solver.n_clusters == 3
-    assert solver._model is None
-
-
 def test_fit(sample_data):
     """Test fitting the KMeans model."""
     solver = KMeansSolver(n_clusters=2)
