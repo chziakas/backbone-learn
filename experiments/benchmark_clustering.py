@@ -91,6 +91,8 @@ for n_samples, n_clusters, n_features in product(
         start_time = time.time()
         backbone_model.fit(X)
         backbone_runtime = time.time() - start_time
+        backbone_size_diff_cluster = len(backbone_model.exact_solver.ls_pairs_diff_cluster)
+        backbone_size_same_cluster = len(backbone_model.exact_solver.ls_pairs_same_cluster)
         backbone_wcss = backbone_model.exact_solver.wcss
         backbone_wcss_heur = backbone_model.heuristic_solver.wcss
         backbone_silhouette_heur = backbone_model.heuristic_solver.silhouette_score
@@ -104,6 +106,8 @@ for n_samples, n_clusters, n_features in product(
             "beta": beta,
             "num_subproblems": num_subproblems,
             "num_iterations": num_iterations,
+            "backbone_size_same_cluster": backbone_size_same_cluster,
+            "backbone_size_diff_cluster": backbone_size_diff_cluster,
             "WCSS": backbone_wcss,
             "WCSS_heur": backbone_wcss_heur,
             "silhouette": backbone_silhouette,
