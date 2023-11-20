@@ -6,7 +6,7 @@
         "n_features": 3,
         "WCSS": 114.54849176336413,
         "silhouette": 0.7938512754505151,
-        "Runtime (seconds)": 0.1713237762451172
+        "Runtime (seconds)": 0.3380551338195801
     },
     {
         "model_name": "exact",
@@ -15,7 +15,7 @@
         "n_features": 3,
         "WCSS": 114.54849176336413,
         "silhouette": 0.7938512754505151,
-        "Runtime (seconds)": 1.7206089496612549
+        "Runtime (seconds)": 1.5817029476165771
     },
     {
         "model_name": "backbone",
@@ -28,7 +28,7 @@
         "WCSS_heur": 114.54849176336413,
         "silhouette": 0.7938512754505151,
         "silhouette_heur": 0.7938512754505151,
-        "Runtime (seconds)": 0.4080178737640381
+        "Runtime (seconds)": 0.2867562770843506
     },
     {
         "model_name": "backbone",
@@ -41,7 +41,7 @@
         "WCSS_heur": 114.54849176336413,
         "silhouette": 0.7938512754505151,
         "silhouette_heur": 0.7938512754505151,
-        "Runtime (seconds)": 0.39888811111450195
+        "Runtime (seconds)": 0.45340585708618164
     },
     {
         "model_name": "backbone",
@@ -54,7 +54,7 @@
         "WCSS_heur": 114.54849176336413,
         "silhouette": 0.7938512754505151,
         "silhouette_heur": 0.7938512754505151,
-        "Runtime (seconds)": 0.40619897842407227
+        "Runtime (seconds)": 0.4640650749206543
     },
     {
         "model_name": "heuristic",
@@ -63,7 +63,7 @@
         "n_features": 20,
         "WCSS": 713.5915401783227,
         "silhouette": 0.8641047965964207,
-        "Runtime (seconds)": 0.2759859561920166
+        "Runtime (seconds)": 0.09402084350585938
     },
     {
         "model_name": "exact",
@@ -72,7 +72,7 @@
         "n_features": 20,
         "WCSS": 713.5915401783227,
         "silhouette": 0.8641047965964207,
-        "Runtime (seconds)": 0.5795331001281738
+        "Runtime (seconds)": 0.9169120788574219
     },
     {
         "model_name": "backbone",
@@ -85,7 +85,7 @@
         "WCSS_heur": 713.5915401783227,
         "silhouette": 0.8641047965964207,
         "silhouette_heur": 0.8641047965964207,
-        "Runtime (seconds)": 0.4148130416870117
+        "Runtime (seconds)": 0.48151087760925293
     },
     {
         "model_name": "backbone",
@@ -98,7 +98,7 @@
         "WCSS_heur": 713.5915401783227,
         "silhouette": 0.8641047965964207,
         "silhouette_heur": 0.8641047965964207,
-        "Runtime (seconds)": 0.4279189109802246
+        "Runtime (seconds)": 0.45804524421691895
     },
     {
         "model_name": "backbone",
@@ -111,7 +111,7 @@
         "WCSS_heur": 713.5915401783227,
         "silhouette": 0.8641047965964207,
         "silhouette_heur": 0.8641047965964207,
-        "Runtime (seconds)": 0.4093139171600342
+        "Runtime (seconds)": 0.46912193298339844
     },
     {
         "model_name": "heuristic",
@@ -120,7 +120,7 @@
         "n_features": 3,
         "WCSS": 64.80038218418046,
         "silhouette": 0.760816722476822,
-        "Runtime (seconds)": 0.27858829498291016
+        "Runtime (seconds)": 0.13416409492492676
     },
     {
         "model_name": "exact",
@@ -129,7 +129,7 @@
         "n_features": 3,
         "WCSS": 64.80038218418046,
         "silhouette": 0.760816722476822,
-        "Runtime (seconds)": 19.555569887161255
+        "Runtime (seconds)": 23.031179904937744
     },
     {
         "model_name": "backbone",
@@ -142,7 +142,7 @@
         "WCSS_heur": 64.80038218418046,
         "silhouette": 0.760816722476822,
         "silhouette_heur": 0.760816722476822,
-        "Runtime (seconds)": 0.7949912548065186
+        "Runtime (seconds)": 1.0957911014556885
     },
     {
         "model_name": "backbone",
@@ -155,7 +155,7 @@
         "WCSS_heur": 64.80038218418046,
         "silhouette": 0.760816722476822,
         "silhouette_heur": 0.760816722476822,
-        "Runtime (seconds)": 0.7543151378631592
+        "Runtime (seconds)": 1.1321582794189453
     },
     {
         "model_name": "backbone",
@@ -168,7 +168,7 @@
         "WCSS_heur": 64.80038218418046,
         "silhouette": 0.760816722476822,
         "silhouette_heur": 0.760816722476822,
-        "Runtime (seconds)": 0.8169372081756592
+        "Runtime (seconds)": 1.1352579593658447
     },
     {
         "model_name": "heuristic",
@@ -177,7 +177,7 @@
         "n_features": 20,
         "WCSS": 598.8769700739174,
         "silhouette": 0.8467989989880225,
-        "Runtime (seconds)": 0.14895105361938477
+        "Runtime (seconds)": 0.2983267307281494
     },
     {
         "model_name": "exact",
@@ -186,7 +186,7 @@
         "n_features": 20,
         "WCSS": 598.8769700739174,
         "silhouette": 0.8467989989880225,
-        "Runtime (seconds)": 9.631545305252075
+        "Runtime (seconds)": 18.859907150268555
     },
     {
         "model_name": "backbone",
@@ -199,7 +199,7 @@
         "WCSS_heur": 598.8769700739174,
         "silhouette": 0.8467989989880225,
         "silhouette_heur": 0.8467989989880225,
-        "Runtime (seconds)": 0.37239909172058105
+        "Runtime (seconds)": 0.4397151470184326
     },
     {
         "model_name": "backbone",
@@ -212,7 +212,7 @@
         "WCSS_heur": 598.8769700739174,
         "silhouette": 0.8467989989880225,
         "silhouette_heur": 0.8467989989880225,
-        "Runtime (seconds)": 0.3735039234161377
+        "Runtime (seconds)": 0.4154539108276367
     },
     {
         "model_name": "backbone",
@@ -225,6 +225,6 @@
         "WCSS_heur": 598.8769700739174,
         "silhouette": 0.8467989989880225,
         "silhouette_heur": 0.8467989989880225,
-        "Runtime (seconds)": 0.3823878765106201
+        "Runtime (seconds)": 0.43764829635620117
     }
 ]

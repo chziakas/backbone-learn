@@ -23,6 +23,7 @@ class BackboneDecisionTree(BackboneSupervised):
         num_threads=None,
         obj_mode="acc",
         n_bins=2,
+        is_data_fit=False,
     ):
         """
         Initializes the sparse regression method with specified components.
@@ -35,6 +36,7 @@ class BackboneDecisionTree(BackboneSupervised):
             num_threads (int or None): Number of threads for parallel processing.
             obj_mode (str): Objective mode, e.g., 'acc' for accuracy.
             n_bins (int): Number of bins for KBinsDiscretizer. Defaults to 2.
+            is_data_fit (bool): Whether data are in the format required for OCT
         """
         self.screen_selector = PearsonCorrelationSelector(alpha)
         self.exact_solver = BendersOCTDecisionTree(
@@ -44,5 +46,6 @@ class BackboneDecisionTree(BackboneSupervised):
             num_threads=num_threads,
             obj_mode=obj_mode,
             n_bins=n_bins,
+            is_data_fit=is_data_fit,
         )
         self.heuristic_solver = CARTDecisionTree()

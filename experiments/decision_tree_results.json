@@ -2,21 +2,26 @@
     {
         "model_name": "heuristic",
         "n_features": 8,
-        "AUC Score": 0.9545454545454545,
-        "Runtime (seconds)": 0.0022940635681152344
+        "n_samples": 100,
+        "n_informative": 2,
+        "depth": 2,
+        "AUC Score": 0.9444444444444444,
+        "Runtime (seconds)": 0.0010421276092529297
     },
     {
         "model_name": "exact",
         "n_features": 8,
+        "n_samples": 100,
         "n_informative": 2,
         "depth": 2,
         "_lambda": 0.0,
-        "AUC Score": 0.8535353535353534,
-        "Runtime (seconds)": 2.9821760654449463
+        "AUC Score": 0.9545454545454545,
+        "Runtime (seconds)": 4.855085849761963
     },
     {
         "model_name": "backbone",
         "n_features": 8,
+        "n_samples": 100,
         "n_informative": 2,
         "alpha": 0.1,
         "beta": 0.5,
@@ -24,12 +29,14 @@
         "num_iterations": 1,
         "depth": 2,
         "_lambda": 0.0,
-        "AUC Score": 0.8535353535353534,
-        "Runtime (seconds)": 1.306257963180542
+        "backbone_size": 4,
+        "AUC Score": 0.9545454545454545,
+        "Runtime (seconds)": 2.155879020690918
     },
     {
         "model_name": "backbone",
         "n_features": 8,
+        "n_samples": 100,
         "n_informative": 2,
         "alpha": 0.1,
         "beta": 0.9,
@@ -37,12 +44,14 @@
         "num_iterations": 1,
         "depth": 2,
         "_lambda": 0.0,
-        "AUC Score": 0.8535353535353534,
-        "Runtime (seconds)": 1.2973268032073975
+        "backbone_size": 4,
+        "AUC Score": 0.9545454545454545,
+        "Runtime (seconds)": 2.1416890621185303
     },
     {
         "model_name": "backbone",
         "n_features": 8,
+        "n_samples": 100,
         "n_informative": 2,
         "alpha": 0.5,
         "beta": 0.5,
@@ -50,12 +59,14 @@
         "num_iterations": 1,
         "depth": 2,
         "_lambda": 0.0,
+        "backbone_size": 2,
         "AUC Score": 0.9545454545454545,
-        "Runtime (seconds)": 0.8547589778900146
+        "Runtime (seconds)": 1.469099998474121
     },
     {
         "model_name": "backbone",
         "n_features": 8,
+        "n_samples": 100,
         "n_informative": 2,
         "alpha": 0.5,
         "beta": 0.9,
@@ -63,27 +74,24 @@
         "num_iterations": 1,
         "depth": 2,
         "_lambda": 0.0,
+        "backbone_size": 2,
         "AUC Score": 0.9545454545454545,
-        "Runtime (seconds)": 0.8554768562316895
-    },
-    {
-        "model_name": "heuristic",
-        "n_features": 8,
-        "AUC Score": 0.9545454545454545,
-        "Runtime (seconds)": 0.0002560615539550781
+        "Runtime (seconds)": 1.4525718688964844
     },
     {
         "model_name": "exact",
         "n_features": 8,
+        "n_samples": 100,
         "n_informative": 2,
         "depth": 2,
         "_lambda": 0.5,
         "AUC Score": 0.9545454545454545,
-        "Runtime (seconds)": 2.9972949028015137
+        "Runtime (seconds)": 4.938706874847412
     },
     {
         "model_name": "backbone",
         "n_features": 8,
+        "n_samples": 100,
         "n_informative": 2,
         "alpha": 0.1,
         "beta": 0.5,
@@ -91,12 +99,14 @@
         "num_iterations": 1,
         "depth": 2,
         "_lambda": 0.5,
-        "AUC Score": 0.8535353535353534,
-        "Runtime (seconds)": 1.2869539260864258
+        "backbone_size": 4,
+        "AUC Score": 0.9545454545454545,
+        "Runtime (seconds)": 2.0310750007629395
     },
     {
         "model_name": "backbone",
         "n_features": 8,
+        "n_samples": 100,
         "n_informative": 2,
         "alpha": 0.1,
         "beta": 0.9,
@@ -104,12 +114,14 @@
         "num_iterations": 1,
         "depth": 2,
         "_lambda": 0.5,
-        "AUC Score": 0.8535353535353534,
-        "Runtime (seconds)": 1.2917790412902832
+        "backbone_size": 4,
+        "AUC Score": 0.9545454545454545,
+        "Runtime (seconds)": 2.0844898223876953
     },
     {
         "model_name": "backbone",
         "n_features": 8,
+        "n_samples": 100,
         "n_informative": 2,
         "alpha": 0.5,
         "beta": 0.5,
@@ -117,12 +129,14 @@
         "num_iterations": 1,
         "depth": 2,
         "_lambda": 0.5,
+        "backbone_size": 2,
         "AUC Score": 0.9545454545454545,
-        "Runtime (seconds)": 0.8451621532440186
+        "Runtime (seconds)": 1.3598382472991943
     },
     {
         "model_name": "backbone",
         "n_features": 8,
+        "n_samples": 100,
         "n_informative": 2,
         "alpha": 0.5,
         "beta": 0.9,
@@ -130,7 +144,8 @@
         "num_iterations": 1,
         "depth": 2,
         "_lambda": 0.5,
+        "backbone_size": 2,
         "AUC Score": 0.9545454545454545,
-        "Runtime (seconds)": 0.8507809638977051
+        "Runtime (seconds)": 1.4315118789672852
     }
 ]

@@ -17,7 +17,14 @@ class BendersOCTDecisionTree(ExactSolverBase):
     """
 
     def __init__(
-        self, depth=3, time_limit=1000, _lambda=0.5, num_threads=None, obj_mode="acc", n_bins=2
+        self,
+        depth=3,
+        time_limit=1000,
+        _lambda=0.5,
+        num_threads=None,
+        obj_mode="acc",
+        n_bins=2,
+        is_data_fit=False,
     ):
         """
         Initializes the BendersOCTDecisionTree with default or specified values.
@@ -29,6 +36,7 @@ class BendersOCTDecisionTree(ExactSolverBase):
             num_threads (int or None): Number of threads for parallel processing.
             obj_mode (str): Objective mode, e.g., 'acc' for accuracy.
             n_bins (int): Number of bins for KBinsDiscretizer.
+            is_data_fit (bool): Whether data are in the format required for OCT
         """
         super().__init__()
         self._model = BendersOCT(
@@ -42,6 +50,7 @@ class BendersOCTDecisionTree(ExactSolverBase):
         self.accuracy_score = None
         self.est_X = KBinsDiscretizer(n_bins=n_bins, encode="ordinal", strategy="quantile")
         self.enc = OneHotEncoder(handle_unknown="error", drop="if_binary")
+        self.is_data_fit = is_data_fit
 
     @property
     def model(self):
@@ -52,16 +61,27 @@ class BendersOCTDecisionTree(ExactSolverBase):
 
     def preprocess_features(self, X):
         """
-        Preprocesses the features using KBinsDiscretizer and OneHotEncoder.
+        Transforms the features using already fitted KBinsDiscretizer and OneHotEncoder.
 
         Args:
-            X (np.ndarray or pd.DataFrame): The input features.
+            X (np.ndarray or pd.DataFrame): The input features (test data).
 
         Returns:
-            np.ndarray: Preprocessed features.
+            np.ndarray: Transformed features.
         """
-        X_bin = self.est_X.fit_transform(X)
-        return self.enc.fit_transform(X_bin).toarray()
+        X_bin = self.est_X.transform(X)
+        return self.enc.transform(X_bin).toarray()
+
+    def fit_preprocessors(self, X_train):
+        """
+        Fits preprocessors to the training data.
+
+        Args:
+            X_train (np.ndarray or pd.DataFrame): The training features.
+        """
+        self.est_X.fit(X_train)
+        X_bin = self.est_X.transform(X_train)
+        self.enc.fit(X_bin)
 
     def fit(self, X, y) -> None:
         """
@@ -71,7 +91,11 @@ class BendersOCTDecisionTree(ExactSolverBase):
             X (np.ndarray or pd.DataFrame): The input features.
             y (np.ndarray or pd.Series): The target variable.
         """
-        X_preprocessed = self.preprocess_features(X)
+        if self.is_data_fit:
+            X_preprocessed = X
+        else:
+            self.fit_preprocessors(X)
+            X_preprocessed = self.preprocess_features(X)
         self._model.fit(X_preprocessed, y)
 
     def predict(self, X) -> np.ndarray:
@@ -84,8 +108,8 @@ class BendersOCTDecisionTree(ExactSolverBase):
         Returns:
             np.ndarray: Predicted values.
         """
-        if self._model:
-            X_preprocessed = self.preprocess_features(X)
-            return self._model.predict(X_preprocessed)
+        if self.is_data_fit:
+            X_preprocessed = X
         else:
-            raise ValueError("Model has not been fitted yet.")
+            X_preprocessed = self.fit_preprocessors(X)
+        return self._model.predict(X_preprocessed)

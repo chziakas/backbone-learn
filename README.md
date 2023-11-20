@@ -6,9 +6,6 @@
 ## backbone_learn
 
 
-
-## backbone_learn
-
 ## Get started
 
 ### Installation
@@ -24,9 +21,9 @@ Note: For ODT implementations, please follow the instructions described in the l
 ### Run simulations
 ```poetry install
 poetry shell
-python experiments/sparse_regression_script.py
-python experiments/clustering_script.py
-python experiments/decision_trees_script.py
+python experiments/benchmark_decision_tree.py
+python experiments/benchmark_sparse_regression.py
+python experiments/benchmark_clustering.py
 ```
 
 
