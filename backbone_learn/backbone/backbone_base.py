@@ -167,7 +167,7 @@ class BackboneBase(ABC):
             for sub, feature_idx in enumerate(subproblems):
                 feature_idx.sort()
                 subset = X_selected[:, feature_idx]
-                self.n_samples_backbone = subset.shape[0]
+                self.n_samples_backbone = len(feature_idx)
                 self.heuristic_solver.__init__(**self.init_parameters)
                 subset = self.preprocessing_backbone(subset)
                 self.heuristic_solver.fit(subset, y, random_state=sub)
