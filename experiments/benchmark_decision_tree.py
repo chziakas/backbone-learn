@@ -13,17 +13,17 @@ from backbone_learn.backbone.backbone_decision_tree import BackboneDecisionTree
 # Define parameter ranges for Backbone parameters
 alpha_range = [0.1, 0.5]
 beta_range = [0.5, 0.9]
-num_subproblems_range = [10]
+num_subproblems_range = [5]
 num_iterations_range = [1]
 # Define parameter ranges for FlowOCT parameters
 depth_range = [2]
-_lambda_range = [0.0, 0.5]
+_lambda_range = [0.5]
 
 # Define dataset parameters
-n_informative = 2
+n_informative = 3
 n_bins = 2
-n_features_range = [4]
-n_samples = 100
+n_features_range = [10]
+n_samples = 500
 n_classes = 2
 random_state = 17
 time_limit = 3600
