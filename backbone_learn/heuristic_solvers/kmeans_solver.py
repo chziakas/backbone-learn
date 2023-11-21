@@ -70,7 +70,7 @@ class KMeansSolver(HeuristicSolverBase):
         self._model.set_params(
             n_clusters=self.n_clusters,
             init="random",
-            n_init="auto",
+            n_init=n_init,
             max_iter=max_iter,
             tol=tol,
             random_state=random_state,
