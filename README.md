@@ -1,9 +1,19 @@
 
 ## Overview
 
+We present *BackboneLearn*: an open-source software package and framework for scaling mixed integer optimization (MIO) problems with indicator variables to high-dimensional problems. 
+*BackboneLearn* solves fundamental problems in interpretable supervised learning including sparse regression and decision trees, in unsupervised learning including clustering, and beyond, all of which can naturally be formulated using the aforementioned optimization paradigm. As we have extensively documented in prior work, the backbone framework can handle supervised learning problems with millions of features in minutes and our *BackboneLearn* implementation indeed accelerates the solution of exact methods while improving upon the quality of commonly used heuristics. The package is built in Python and is user-friendly and easily extendible: users can directly implement a backbone algorithm for their MIO problem at hand.
 
+#### What do we mean by indicators?
+
+Indicators are binary variables that are part of the MIO problem we use to train the aforementioned models. 
+- In the context of sparse regression, where require that only a few regression coefficients are nonzero, we couple each regression coefficient (and the corresponding feature) with an inidicator. The indicator is 1 if the coefficient is indeed nonzero, and 0 otherwise. 
+- In the context of decision trees, the indicator corresponding to feature j in split node t is nonzero iff, at node t, we branch on feature j. 
+- In the context of clustering, the indicator corresponding to a pair of data points (i,j) is nonzero iff i and j are put in the same cluster.
 
 ## backbone_learn
+
+The backbone framework, upon which *BackboneLearn* is built, operates in two phases: we first extract a “backbone set” of potentially ``relevant indicators'' (i.e., indicators that are nonzero in the optimal solution) by solving a number of specially chosen, tractable subproblems; we then use traditional techniques to solve a reduced problem to optimality or near-optimality, considering only the backbone indicators. A screening step often proceeds the first phase, to discard indicators that are almost surely irrelevant. 
 
 
 ## Get started
