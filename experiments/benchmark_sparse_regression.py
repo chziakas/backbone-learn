@@ -12,15 +12,15 @@ from backbone_learn.heuristic_solvers.lasso_regression import LassoRegression
 # Define parameter ranges for Backbone parameters
 alpha_range = [0.1, 0.5]
 beta_range = [0.5, 0.9]
-num_subproblems_range = [5]
+num_subproblems_range = [5, 10]
 num_iterations_range = [1]
 # Define parameter ranges for Lobnb parameters
-lambda_2_range = [0.001]
-n_non_zeros = 4
-max_nonzeros = 4
+lambda_2_range = [0.01]
+n_non_zeros = 10
+max_nonzeros = 10
 
 # Define range for features and other constants
-n_features_range = [1000]
+n_features_range = [5000]
 n_samples = 500
 random_state = 17
 time_limit = 1800
@@ -41,7 +41,7 @@ for n_features in n_features_range:
     # Lasso regression model iteration for heuristic_model
     heuristic_model = LassoRegression()
     start_time = time.time()
-    heuristic_model.fit(X_train, y_train)
+    heuristic_model.fit(X_train, y_train, random_state=random_state)
     runtime = time.time() - start_time
     heuristic_model.keep_top_features(n_non_zeros)
     y_pred_heuristic = heuristic_model.predict(X_test)
@@ -55,6 +55,7 @@ for n_features in n_features_range:
         "Runtime (seconds)": runtime,
     }
     results.append(result_heuristic)
+    save_results(results, log_filename)
 
     # BackboneSparseRegression model iterations for 'backbone' and 'exact' solvers
     for lambda_2 in lambda_2_range:
@@ -77,6 +78,7 @@ for n_features in n_features_range:
             "Runtime (seconds)": runtime,
         }
         results.append(result_exact)
+        save_results(results, log_filename)
 
         # Backbone model iteration using BackboneSparseRegression
         for alpha, beta, num_subproblems, num_iterations in product(
@@ -112,9 +114,9 @@ for n_features in n_features_range:
                 "Runtime (seconds)": runtime,
             }
             results.append(result_backbone)
+            save_results(results, log_filename)
 
-# Print or further process results
 save_results(results, log_filename)
-# Print or further process results
+# Printresults
 for result in results:
     print(result)

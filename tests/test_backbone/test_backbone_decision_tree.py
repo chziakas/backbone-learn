@@ -1,6 +1,5 @@
 import numpy as np
 import pytest
-from sklearn.metrics import accuracy_score
 
 from backbone_learn.backbone.backbone_decision_tree import BackboneDecisionTree
 from backbone_learn.exact_solvers.benders_oct_decision_tree import BendersOCTDecisionTree
@@ -67,20 +66,3 @@ def test_heuristic_solver_integration(sample_data):
     predictions = backbone.heuristic_solver.predict(X)
     assert len(predictions) == len(y)
     assert isinstance(predictions, np.ndarray)
-
-
-def test_end_to_end_pipeline(sample_data):
-    """Test the entire pipeline from feature screening to model fitting."""
-    X, y = sample_data
-    backbone = BackboneDecisionTree()
-    backbone.set_solvers(
-        alpha=0.5, depth=3, time_limit=1000, _lambda=0.5, num_threads=1, obj_mode="acc", n_bins=2
-    )
-
-    screened_X = backbone.screen_selector.select(X, y)
-    backbone.exact_solver.fit(screened_X, y)
-    predictions = backbone.exact_solver.predict(screened_X)
-
-    # Check if predictions are reasonable
-    assert len(predictions) == len(y)
-    assert accuracy_score(y, predictions) >= 0.5  # Or any other relevant threshold

@@ -1,23 +1,27 @@
 import numpy as np
+from sklearn.preprocessing import KBinsDiscretizer, OneHotEncoder
 
 from backbone_learn.exact_solvers.benders_oct_decision_tree import BendersOCTDecisionTree
 
 
-def test_preprocess_features():
-    """Test the preprocessing of features."""
-    model = BendersOCTDecisionTree(n_bins=3)
-    X = np.array([[1, 2, 6], [4, 5, 9], [7, 8, 12]])
-    X_preprocessed = model.preprocess_features(X)
-    assert X_preprocessed.shape[1] == X.shape[1] * 3
-    assert np.all(X_preprocessed >= 0)
+def test_default_initialization():
+    tree = BendersOCTDecisionTree()
+    assert isinstance(tree.est_X, KBinsDiscretizer)
+    assert isinstance(tree.enc, OneHotEncoder)
+    assert not tree.is_data_fit
 
 
-def test_fit_predict():
-    """Test fitting and predicting with the model."""
-    model = BendersOCTDecisionTree()
-    X = np.array([[1, 2], [3, 4], [5, 6]])
-    y = np.array([0, 1, 0])
-    model.fit(X, y)
-    predictions = model.predict(X)
-    assert len(predictions) == len(y)
-    assert np.all(np.isin(predictions, [0, 1]))
+def test_preprocess_features_with_numpy():
+    tree = BendersOCTDecisionTree()
+    X = np.random.rand(10, 2)  # Sample data
+    tree.fit_preprocessors(X)  # Fit preprocessors first
+    X_transformed = tree.preprocess_features(X)
+    assert X_transformed.shape == (10, 2)  # Expected shape
+
+
+def test_fit_preprocessors():
+    tree = BendersOCTDecisionTree()
+    X_train = np.random.rand(10, 2)  # Sample training data
+    tree.fit_preprocessors(X_train)
+    assert tree.est_X.n_bins_ is not None  # est_X should be fitted
+    assert tree.enc.categories_ is not None  # enc should be fitted

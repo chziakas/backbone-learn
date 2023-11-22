@@ -22,7 +22,6 @@ class BackboneClustering(BackboneUnsupervised):
             n_clusters (int, optional): Number of clusters for K-means. Defaults to 10.
             time_limit (int): Time limit for the optimization process.
         """
-        print(f"n_clusters_backbone:{n_clusters}")
         self.screen_selector = None  # No screen selector for this clustering approach
         self.heuristic_solver = KMeansSolver(n_clusters=n_clusters)
         self.exact_solver = MIOClustering(n_clusters=n_clusters, time_limit=time_limit)

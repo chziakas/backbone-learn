@@ -12,9 +12,9 @@ from backbone_learn.heuristic_solvers.kmeans_solver import KMeansSolver
 beta_range = [1.0]
 num_subproblems_range = [3, 5, 10]
 num_iterations_range = [1]
-n_clusters_range = [2]
+n_clusters_range = [5]
 n_features_range = [2]
-n_samples_range = [50]
+n_samples_range = [200]
 
 # Constants
 random_state = 17
@@ -30,12 +30,12 @@ for n_samples, n_clusters, n_features in product(
     X, _ = make_blobs(
         n_samples=n_samples, n_features=n_features, cluster_std=1.0, random_state=random_state
     )
-    X = np.random.rand(n_samples, 2) - 0.5 + X
+    X = np.random.default_rng(random_state).standard_normal((n_samples, n_features)) - 0.5 + X
 
     # KMeansSolver model iteration (labeled as 'heuristic')
     heuristic_model = KMeansSolver(n_clusters=n_clusters)
     start_time = time.time()
-    heuristic_model.fit(X)
+    heuristic_model.fit(X, random_state=random_state)
     heuristic_runtime = time.time() - start_time
     heuristic_wcss = heuristic_model.wcss
     heuristic_silhouette = heuristic_model.silhouette_score
@@ -51,29 +51,7 @@ for n_samples, n_clusters, n_features in product(
         "Runtime (seconds)": heuristic_runtime,
     }
     results.append(result_heuristic)
-
-    # BackboneClustering model iterations for 'exact' solver
-    exact_model = BackboneClustering(n_clusters=n_clusters, time_limit=time_limit)
-    exact_model.screen_selector = None
-    exact_model.heuristic_solver = None
-    start_time = time.time()
-    exact_model.fit(X)
-    exact_runtime = time.time() - start_time
-    exact_wcss = exact_model.exact_solver.wcss
-    exact_silhouette = exact_model.exact_solver.silhouette_score
-
-    # Record exact model results
-    result_exact = {
-        "model_name": "exact",
-        "n_samples": n_samples,
-        "n_clusters": n_clusters,
-        "n_features": n_features,
-        "WCSS": exact_wcss,
-        "silhouette": exact_silhouette,
-        "Runtime (seconds)": exact_runtime,
-    }
-
-    results.append(result_exact)
+    save_results(results, log_filename)
 
     # BackboneClustering model iterations for 'backbone' solvers
     for beta, num_subproblems, num_iterations in product(
@@ -113,6 +91,31 @@ for n_samples, n_clusters, n_features in product(
             "Runtime (seconds)": backbone_runtime,
         }
         results.append(result_backbone)
+        save_results(results, log_filename)
+
+    # BackboneClustering model iterations for 'exact' solver
+    exact_model = BackboneClustering(n_clusters=n_clusters, time_limit=time_limit)
+    exact_model.screen_selector = None
+    exact_model.heuristic_solver = None
+    start_time = time.time()
+    exact_model.fit(X)
+    exact_runtime = time.time() - start_time
+    exact_wcss = exact_model.exact_solver.wcss
+    exact_silhouette = exact_model.exact_solver.silhouette_score
+
+    # Record exact model results
+    result_exact = {
+        "model_name": "exact",
+        "n_samples": n_samples,
+        "n_clusters": n_clusters,
+        "n_features": n_features,
+        "WCSS": exact_wcss,
+        "silhouette": exact_silhouette,
+        "Runtime (seconds)": exact_runtime,
+    }
+
+    results.append(result_exact)
+    save_results(results, log_filename)
 
 save_results(results, log_filename)
 # Print or further process results

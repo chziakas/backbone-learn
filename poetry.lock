@@ -169,9 +169,6 @@ files = [
     {file = "Babel-2.13.1.tar.gz", hash = "sha256:33e0952d7dd6374af8dbf6768cc4ddf3ccfefc244f9986d4074704f2fbd18900"},
 ]
 
-[package.dependencies]
-setuptools = {version = "*", markers = "python_version >= \"3.12\""}
-
 [package.extras]
 dev = ["freezegun (>=1.0,<2.0)", "pytest (>=6.0)", "pytest-cov"]
 
@@ -693,38 +690,6 @@ files = [
     {file = "fqdn-1.5.1-py3-none-any.whl", hash = "sha256:3a179af3761e4df6eb2e026ff9e1a3033d3587bf980a0b1b2e1e5d08d7358014"},
     {file = "fqdn-1.5.1.tar.gz", hash = "sha256:105ed3677e767fb5ca086a0c1f4bb66ebc3c100be518f0e0d755d9eae164d89f"},
 ]
-
-[[package]]
-name = "gurobipy"
-version = "10.0.3"
-description = "Python interface to Gurobi"
-optional = false
-python-versions = "*"
-files = [
-    {file = "gurobipy-10.0.3-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:a6fdeadceae4cec7a4764ef4c0e6dc5ad7ad0c03abb6e3b356a743039304f60b"},
-    {file = "gurobipy-10.0.3-cp310-cp310-manylinux2014_aarch64.whl", hash = "sha256:b418cd7e33905a59f6dfe4f3e91e523e5d02a15cb7374442694f6bf2895a5656"},
-    {file = "gurobipy-10.0.3-cp310-cp310-manylinux2014_x86_64.whl", hash = "sha256:919817afb13681da86b0ee645b3044a57056f64dd90e66400a076415460a298f"},
-    {file = "gurobipy-10.0.3-cp310-cp310-win_amd64.whl", hash = "sha256:c5d908a9682d28d4eafc6f97d1408ab204e72aa97c2c726f339097b58de48d7a"},
-    {file = "gurobipy-10.0.3-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:b01009368f04f1f73c94a02737857fc51fbf4aa6697edadb5776b72c0f901a7c"},
-    {file = "gurobipy-10.0.3-cp311-cp311-manylinux2014_aarch64.whl", hash = "sha256:e41628b167dd33e853347ea5adce93e8924777797965bbd895e333a3795557f1"},
-    {file = "gurobipy-10.0.3-cp311-cp311-manylinux2014_x86_64.whl", hash = "sha256:a58fb26639d0eccc79bc25a86fde65d9f10c289f54dc7c1177d44c737e25f82f"},
-    {file = "gurobipy-10.0.3-cp311-cp311-win_amd64.whl", hash = "sha256:90c21026cee7d3bd9e73b454996e9b03b97e1481f6d75aefac81204783a629b9"},
-    {file = "gurobipy-10.0.3-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:4ac79995e6af3611521186d29f929725e15015267d1b505fea6b2a90367a0ddd"},
-    {file = "gurobipy-10.0.3-cp37-cp37m-manylinux2014_aarch64.whl", hash = "sha256:2f7f8e73624ec32e19f4bfdd1a102abf2d5ecd667b81d76aae4a31f460a303d3"},
-    {file = "gurobipy-10.0.3-cp37-cp37m-manylinux2014_x86_64.whl", hash = "sha256:117a744cf25b6cd6e338cf7210f93c8703821b1173d9cabe7ad3e094c7ddab56"},
-    {file = "gurobipy-10.0.3-cp37-cp37m-win_amd64.whl", hash = "sha256:140df7c858b55111041c90953db5df3ee8201b0e37ebf41e6d3353c601f6ffe8"},
-    {file = "gurobipy-10.0.3-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:5f7ff9e6224d6c59d49c12d6310b9eeb6cf2654434bcb1edf2255cfad7e32a78"},
-    {file = "gurobipy-10.0.3-cp38-cp38-manylinux2014_aarch64.whl", hash = "sha256:81971b05e5146787da50eb403e43640d557e4c5669215601be539d1d15256dba"},
-    {file = "gurobipy-10.0.3-cp38-cp38-manylinux2014_x86_64.whl", hash = "sha256:3544303e8f8e657827714ee825b00afa07cb7471443ba9c141da2fbe408c7046"},
-    {file = "gurobipy-10.0.3-cp38-cp38-win_amd64.whl", hash = "sha256:babb3ff5ac286fa405702e1313e40ebd992672b3dd7ce6dd441bbbede1ed56ca"},
-    {file = "gurobipy-10.0.3-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:4fe0419554897022478cceb414bf8b3fba91806bdd8ba227d3edecdf8d90720a"},
-    {file = "gurobipy-10.0.3-cp39-cp39-manylinux2014_aarch64.whl", hash = "sha256:01bf7e756bf44373900b7f1fe410cd12df346708abd58a0f3af51a605a714a35"},
-    {file = "gurobipy-10.0.3-cp39-cp39-manylinux2014_x86_64.whl", hash = "sha256:bea65f0b0edcd40a0e6bdf6a468a3a92195dd6ca7fa588200ec169610275f273"},
-    {file = "gurobipy-10.0.3-cp39-cp39-win_amd64.whl", hash = "sha256:8a6eb953435c03b998cf3d56e57ea8b50cc5eea2a2aac2b2326416b921ca044a"},
-]
-
-[package.extras]
-matrixapi = ["numpy", "scipy"]
 
 [[package]]
 name = "identify"
@@ -1566,24 +1531,6 @@ files = [
 traitlets = "*"
 
 [[package]]
-name = "mip"
-version = "1.14.2"
-description = "Python tools for Modeling and Solving Mixed-Integer Linear Programs (MIPs)"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "mip-1.14.2-py3-none-any.whl", hash = "sha256:ed107d97913f5b76615bd732a86d0b5aafc276155b49d2ee971a7546ddd831b0"},
-    {file = "mip-1.14.2.tar.gz", hash = "sha256:c2be205d2878e7a85e1b99ec6848b6ca8ecb32b7b635de906d39b475c0c25f59"},
-]
-
-[package.dependencies]
-cffi = "1.15.0"
-
-[package.extras]
-gurobi = ["gurobipy (>=8)"]
-numpy = ["numpy (==1.21.6)", "numpy (==1.23.1)"]
-
-[[package]]
 name = "mistune"
 version = "3.0.2"
 description = "A sane and fast Markdown parser with useful plugins and renderers"
@@ -1820,33 +1767,6 @@ files = [
 ]
 
 [[package]]
-name = "odtlearn"
-version = "1.0.0"
-description = ""
-optional = false
-python-versions = ">=3.8"
-files = []
-develop = false
-
-[package.dependencies]
-gurobipy = "*"
-mip = "*"
-numpy = "*"
-pandas = "*"
-scikit-learn = "*"
-scipy = "*"
-
-[package.extras]
-docs = ["furo", "matplotlib", "numpydoc", "sphinx", "sphinx-autoapi", "sphinx-gallery"]
-tests = ["pytest", "pytest-cov"]
-
-[package.source]
-type = "git"
-url = "https://github.com/D3M-Research-Group/odtlearn.git"
-reference = "HEAD"
-resolved_reference = "5c743a3ab4a19dda123b84626fcef83913f530fe"
-
-[[package]]
 name = "overrides"
 version = "7.4.0"
 description = "A decorator to automatically detect mismatch when overriding a method."
@@ -1906,7 +1826,6 @@ files = [
 numpy = [
     {version = ">=1.22.4,<2", markers = "python_version < \"3.11\""},
     {version = ">=1.23.2,<2", markers = "python_version == \"3.11\""},
-    {version = ">=1.26.0,<2", markers = "python_version >= \"3.12\""},
 ]
 python-dateutil = ">=2.8.2"
 pytz = ">=2020.1"
@@ -3138,5 +3057,5 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 
 [metadata]
 lock-version = "2.0"
-python-versions = ">=3.9,<3.13"
-content-hash = "b8826311b0c39580724992618ddb53ff2a150c1d1fd0065ebc63592b47e536ae"
+python-versions = ">=3.9,<3.12"
+content-hash = "50ce55f57c8a192edaae04e47b60703440815ed9a55c50161725c1a28a5e81ba"
