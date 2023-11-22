@@ -19,19 +19,25 @@ def test_backbone_clustering(sample_data):
     backbone_model.fit(sample_data)
 
     # Test if the model has fitted
-    assert backbone_model.exact_solver is not None
-    assert backbone_model.heuristic_solver is not None
+    if backbone_model.exact_solver is None:
+        raise AssertionError("Backbone model's exact solver is not initialized")
+    if backbone_model.heuristic_solver is None:
+        raise AssertionError("Backbone model's heuristic solver is not initialized")
 
     # Test constraints are applied
     for (i, j) in backbone_model.exact_solver.ls_pairs_diff_cluster:
         for k in range(n_clusters):
             y_sum = backbone_model.exact_solver.y[i, k] + backbone_model.exact_solver.y[j, k]
-            assert y_sum < 2
-            assert backbone_model.exact_solver.z[i, j, k] == 0.0
+            if y_sum >= 2:
+                raise AssertionError("Constraint on y_sum violated")
+            if backbone_model.exact_solver.z[i, j, k] != 0.0:
+                raise AssertionError("Constraint on z violated")
 
     # Test silhouette scores
-    assert 0 <= backbone_model.exact_solver.silhouette_score <= 1
-    assert 0 <= backbone_model.heuristic_solver.silhouette_score <= 1
+    if not (0 <= backbone_model.exact_solver.silhouette_score <= 1):
+        raise AssertionError("Exact solver's silhouette score out of range")
+    if not (0 <= backbone_model.heuristic_solver.silhouette_score <= 1):
+        raise AssertionError("Heuristic solver's silhouette score out of range")
 
 
 def test_kmeans_solver(sample_data):
@@ -40,10 +46,13 @@ def test_kmeans_solver(sample_data):
     heuristic_model.fit(sample_data)
 
     # Test if the model has fitted
-    assert heuristic_model.model is not None
+    if heuristic_model.model is None:
+        raise AssertionError("KMeans solver model is not initialized")
 
     # Test silhouette scores
-    assert 0 <= heuristic_model.silhouette_score <= 1
+    if not (0 <= heuristic_model.silhouette_score <= 1):
+        raise AssertionError("KMeans solver's silhouette score out of range")
 
     # Test WCSS
-    assert heuristic_model.wcss >= 0
+    if heuristic_model.wcss < 0:
+        raise AssertionError("KMeans solver's WCSS is negative")

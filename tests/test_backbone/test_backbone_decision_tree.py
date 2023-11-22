@@ -9,7 +9,7 @@ from backbone_learn.heuristic_solvers.cart_decision_tree import CARTDecisionTree
 @pytest.fixture
 def sample_data():
     # Create a simple dataset for testing
-    X = np.random.rand(50, 2)  # 100 samples, 10 features
+    X = np.random.rand(50, 2)  # 50 samples, 2 features
     y = np.random.randint(0, 2, 50)  # Binary target
     return X, y
 
@@ -17,7 +17,8 @@ def sample_data():
 def test_initialization():
     """Test initialization of BackboneDecisionTree."""
     backbone = BackboneDecisionTree()
-    assert isinstance(backbone, BackboneDecisionTree)
+    if not isinstance(backbone, BackboneDecisionTree):
+        raise AssertionError("Initialization of BackboneDecisionTree failed")
 
 
 def test_set_solvers(sample_data):
@@ -28,8 +29,10 @@ def test_set_solvers(sample_data):
     )
 
     # Test if solvers are set correctly
-    assert isinstance(backbone.exact_solver, BendersOCTDecisionTree)
-    assert isinstance(backbone.heuristic_solver, CARTDecisionTree)
+    if not isinstance(backbone.exact_solver, BendersOCTDecisionTree):
+        raise AssertionError("exact_solver is not an instance of BendersOCTDecisionTree")
+    if not isinstance(backbone.heuristic_solver, CARTDecisionTree):
+        raise AssertionError("heuristic_solver is not an instance of CARTDecisionTree")
 
 
 def test_feature_screening(sample_data):
@@ -39,8 +42,9 @@ def test_feature_screening(sample_data):
     backbone.set_solvers(alpha=0.5)
     screened_features = backbone.screen_selector.select(X, y)
 
-    # Assert that the number of features after screening is correct
-    assert 0 < screened_features.shape[1] <= X.shape[1]
+    # Test that the number of features after screening is correct
+    if not (0 < screened_features.shape[1] <= X.shape[1]):
+        raise AssertionError("Feature screening did not return correct number of features")
 
 
 def test_exact_solver_integration(sample_data):
@@ -51,7 +55,8 @@ def test_exact_solver_integration(sample_data):
     backbone.exact_solver.fit(X, y)
 
     # Asserting model has been fitted
-    assert backbone.exact_solver.model is not None
+    if backbone.exact_solver.model is None:
+        raise AssertionError("exact_solver model has not been fitted")
 
 
 def test_heuristic_solver_integration(sample_data):
@@ -63,5 +68,7 @@ def test_heuristic_solver_integration(sample_data):
 
     # Asserting model has been fitted and can predict
     predictions = backbone.heuristic_solver.predict(X)
-    assert len(predictions) == len(y)
-    assert isinstance(predictions, np.ndarray)
+    if len(predictions) != len(y):
+        raise AssertionError("Length of predictions does not match length of y")
+    if not isinstance(predictions, np.ndarray):
+        raise AssertionError("Predictions are not an instance of np.ndarray")

@@ -10,10 +10,14 @@ def test_subproblem_constructor_initialization():
 
     constructor = SubproblemConstructor(utilities, beta, num_subproblems)
 
-    assert constructor.num_features == 5
-    assert constructor.beta == beta
-    assert constructor.num_features_subproblem == 3  # 5 * 0.5 rounded up
-    assert constructor.num_subproblems == num_subproblems
+    if constructor.num_features != 5:
+        raise AssertionError("Constructor num_features not set correctly")
+    if constructor.beta != beta:
+        raise AssertionError("Constructor beta not set correctly")
+    if constructor.num_features_subproblem != 3:  # 5 * 0.5 rounded up
+        raise AssertionError("Constructor num_features_subproblem not set correctly")
+    if constructor.num_subproblems != num_subproblems:
+        raise AssertionError("Constructor num_subproblems not set correctly")
 
 
 def test_subproblem_constructor_correct_number_of_subproblems():
@@ -24,7 +28,8 @@ def test_subproblem_constructor_correct_number_of_subproblems():
     constructor = SubproblemConstructor(utilities, beta, num_subproblems)
     subproblems = constructor.construct_subproblems()
 
-    assert len(subproblems) == num_subproblems
+    if len(subproblems) != num_subproblems:
+        raise AssertionError("Incorrect number of subproblems created")
 
 
 def test_subproblem_constructor_correct_number_of_features_in_subproblems():
@@ -36,7 +41,8 @@ def test_subproblem_constructor_correct_number_of_features_in_subproblems():
     subproblems = constructor.construct_subproblems()
 
     for subproblem in subproblems:
-        assert len(subproblem) == 3  # 6 * 0.4 rounded up
+        if len(subproblem) != 3:  # 6 * 0.4 rounded up
+            raise AssertionError("Incorrect number of features in a subproblem")
 
 
 def test_subproblem_constructor_valid_indices():
@@ -51,10 +57,12 @@ def test_subproblem_constructor_valid_indices():
 
     for subproblem in subproblems:
         # Check if all indices are within range
-        assert all(0 <= idx < total_features for idx in subproblem)
+        if not all(0 <= idx < total_features for idx in subproblem):
+            raise AssertionError("Invalid indices in subproblem")
 
         # Check for duplicates within a subproblem
-        assert len(set(subproblem)) == len(subproblem)
+        if len(set(subproblem)) != len(subproblem):
+            raise AssertionError("Duplicates found in a subproblem")
 
 
 def test_create_subsets_from_X():
@@ -75,6 +83,8 @@ def test_create_subsets_from_X():
     subsets = [X[:, subproblem] for subproblem in subproblems]
 
     # Assertions and checks
-    assert len(subsets) == num_subproblems
+    if len(subsets) != num_subproblems:
+        raise AssertionError("Incorrect number of subsets created")
     for subset, subproblem in zip(subsets, subproblems):
-        assert subset.shape[1] == len(subproblem)  # Check the number of features in each subset
+        if subset.shape[1] != len(subproblem):  # Check the number of features in each subset
+            raise AssertionError("Mismatch in number of features in a subset")

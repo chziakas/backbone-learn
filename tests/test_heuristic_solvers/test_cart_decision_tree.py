@@ -9,9 +9,12 @@ def test_fit_method():
     (X > 0.0).astype(int)
     cart.fit(X, y)
 
-    assert cart.model is not None
-    assert isinstance(cart.auc_score, float)
-    assert 0 <= cart.auc_score <= 1
+    if cart.model is None:
+        raise AssertionError("CARTDecisionTree model not initialized after fit")
+    if not isinstance(cart.auc_score, float):
+        raise AssertionError("CARTDecisionTree auc_score is not a float value")
+    if not (0 <= cart.auc_score <= 1):
+        raise AssertionError("CARTDecisionTree auc_score is out of the expected range (0-1)")
 
 
 def test_get_significant_features():
@@ -27,8 +30,10 @@ def test_get_significant_features():
     significant_features = cart.get_relevant_variables(threshold)
 
     # Check if the method identifies significant features correctly
-    assert len(significant_features) >= 0
-    assert all(cart.model.feature_importances_[idx] > threshold for idx in significant_features)
+    if len(significant_features) < 0:
+        raise AssertionError("Number of significant features is less than 0")
+    if not all(cart.model.feature_importances_[idx] > threshold for idx in significant_features):
+        raise AssertionError("Identified significant features do not meet the threshold")
 
 
 def test_cart_decision_tree_predict():
@@ -41,5 +46,7 @@ def test_cart_decision_tree_predict():
     model.fit(X_train, y_train)
     predictions = model.predict(X_test)
 
-    assert len(predictions) == len(X_test)
-    assert all(pred in [0, 1] for pred in predictions)
+    if len(predictions) != len(X_test):
+        raise AssertionError("Number of predictions does not match number of test samples")
+    if not all(pred in [0, 1] for pred in predictions):
+        raise AssertionError("Predictions contain values outside of [0, 1]")

@@ -13,7 +13,8 @@ def test_fit():
     reg = LassoRegression()
     reg.fit(X, y)
 
-    assert reg.model is not None
+    if reg.model is None:
+        raise AssertionError("LassoRegression model not initialized after fit")
 
 
 def test_get_significant_features():
@@ -32,8 +33,10 @@ def test_get_significant_features():
     significant_features = reg.get_relevant_variables(threshold)
 
     # Check if the method identifies the correct features
-    assert len(significant_features) > 0
-    assert all(abs(reg.model.coef_[idx]) > threshold for idx in significant_features)
+    if len(significant_features) == 0:
+        raise AssertionError("No significant features identified")
+    if not all(abs(reg.model.coef_[idx]) > threshold for idx in significant_features):
+        raise AssertionError("Identified significant features do not meet threshold")
 
 
 def test_lasso_regression_predict():
@@ -44,4 +47,5 @@ def test_lasso_regression_predict():
     model.fit(X_train, y_train)
     predictions = model.predict(X_test)
 
-    assert len(predictions) == len(X_test)
+    if len(predictions) != len(X_test):
+        raise AssertionError("Number of predictions does not match number of test samples")

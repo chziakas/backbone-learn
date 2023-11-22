@@ -8,8 +8,10 @@ def test_subproblem_feature_selector_initialization():
     num_features_to_select = 2
     selector = SubproblemFeatureSelector(utilities, num_features_to_select)
 
-    assert np.array_equal(selector.utilities, utilities)
-    assert selector.num_features_to_select == num_features_to_select
+    if not np.array_equal(selector.utilities, utilities):
+        raise AssertionError("Selector utilities not set correctly")
+    if selector.num_features_to_select != num_features_to_select:
+        raise AssertionError("Selector num_features_to_select not set correctly")
 
 
 def test_subproblem_feature_selector_selection():
@@ -20,10 +22,12 @@ def test_subproblem_feature_selector_selection():
     selected_indices = selector.select()
 
     # Check if the length of the selected indices is correct
-    assert len(selected_indices) == num_features_to_select
+    if len(selected_indices) != num_features_to_select:
+        raise AssertionError("Incorrect number of features selected")
 
     # Check if selected indices are valid
-    assert all([idx in range(len(utilities)) for idx in selected_indices])
+    if not all([idx in range(len(utilities)) for idx in selected_indices]):
+        raise AssertionError("Invalid indices selected")
 
 
 def test_subproblem_feature_selector_probability_distribution():
@@ -33,12 +37,11 @@ def test_subproblem_feature_selector_probability_distribution():
 
     selector.select()
 
-    # In this case, the highest utility is significantly larger,
-    # so it should be selected most of the time.
-    # Run the selection multiple times to verify this.
+    # Run the selection multiple times to verify distribution
     counts = np.zeros(len(utilities))
     for _ in range(1000):
         idx = selector.select()[0]
         counts[idx] += 1
 
-    assert np.argmax(counts) == np.argmax(utilities)
+    if np.argmax(counts) != np.argmax(utilities):
+        raise AssertionError("Probability distribution does not align with utility values")

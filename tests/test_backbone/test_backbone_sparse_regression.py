@@ -5,9 +5,12 @@ from backbone_learn.backbone.backbone_sparse_regression import BackboneSparseReg
 
 def test_backbone_sparse_regression_initialization():
     backbone = BackboneSparseRegression(alpha=0.5, beta=0.3, num_subproblems=2)
-    assert backbone.screen_selector.alpha == 0.5
-    assert backbone.beta == 0.3
-    assert backbone.num_subproblems == 2
+    if not backbone.screen_selector.alpha == 0.5:
+        raise AssertionError("Backbone screen_selector alpha not set correctly")
+    if not backbone.beta == 0.3:
+        raise AssertionError("Backbone beta not set correctly")
+    if not backbone.num_subproblems == 2:
+        raise AssertionError("Backbone num_subproblems not set correctly")
 
 
 def test_backbone_sparse_regression_predict():
@@ -18,8 +21,9 @@ def test_backbone_sparse_regression_predict():
     backbone.fit(X, y)
     predictions = backbone.predict(X)
 
-    # Asserts to validate the predictions
-    assert len(predictions) == len(y), "Prediction length mismatch"
+    # Validate the predictions
+    if not len(predictions) == len(y):
+        raise AssertionError("Prediction length mismatch")
 
 
 def test_backbone_sparse_regression_predict_no_screening():
@@ -31,8 +35,9 @@ def test_backbone_sparse_regression_predict_no_screening():
     backbone.fit(X, y)
     predictions = backbone.predict(X)
 
-    # Asserts to validate the predictions
-    assert len(predictions) == len(y), "Prediction length mismatch"
+    # Validate the predictions
+    if not len(predictions) == len(y):
+        raise AssertionError("Prediction length mismatch with no screening")
 
 
 def test_backbone_sparse_regression_predict_no_backbone():
@@ -44,5 +49,6 @@ def test_backbone_sparse_regression_predict_no_backbone():
     backbone.fit(X, y)
     predictions = backbone.predict(X)
 
-    # Asserts to validate the predictions
-    assert len(predictions) == len(y), "Prediction length mismatch"
+    # Validate the predictions
+    if not len(predictions) == len(y):
+        raise AssertionError("Prediction length mismatch with no backbone")

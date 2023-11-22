@@ -13,15 +13,18 @@ def test_fit(sample_data):
     """Test fitting the KMeans model."""
     solver = KMeansSolver(n_clusters=2)
     solver.fit(sample_data)
-    assert solver._model is not None
-    assert len(solver.cluster_centers) == 2
+    if solver._model is None:
+        raise AssertionError("KMeans model not initialized after fit")
+    if len(solver.cluster_centers) != 2:
+        raise AssertionError("Number of cluster centers is not 2 as expected")
 
 
 def test_compute_cluster_centers(sample_data):
     """Test computation of cluster centers."""
     solver = KMeansSolver(n_clusters=2)
     solver.fit(sample_data)
-    assert solver.cluster_centers.shape == (2, 2)
+    if solver.cluster_centers.shape != (2, 2):
+        raise AssertionError("Cluster centers shape is not (2, 2) as expected")
 
 
 def test_compute_wcss(sample_data):
@@ -29,8 +32,10 @@ def test_compute_wcss(sample_data):
     solver = KMeansSolver(n_clusters=2)
     solver.fit(sample_data)
     wcss = solver._compute_wcss(sample_data)
-    assert isinstance(wcss, float)
-    assert wcss > 0
+    if not isinstance(wcss, float):
+        raise AssertionError("WCSS is not a float value")
+    if wcss <= 0:
+        raise AssertionError("WCSS is not greater than 0")
 
 
 def test_get_relevant_variables(sample_data):
@@ -38,8 +43,10 @@ def test_get_relevant_variables(sample_data):
     solver = KMeansSolver(n_clusters=2)
     solver.fit(sample_data)
     relevant_vars = solver.get_relevant_variables()
-    assert isinstance(relevant_vars, list)
-    assert all(isinstance(pair, tuple) for pair in relevant_vars)
+    if not isinstance(relevant_vars, list):
+        raise AssertionError("Relevant variables not returned as a list")
+    if not all(isinstance(pair, tuple) for pair in relevant_vars):
+        raise AssertionError("Elements in relevant variables are not tuples")
 
 
 def test_compute_silhouette_score(sample_data):
@@ -47,4 +54,5 @@ def test_compute_silhouette_score(sample_data):
     solver = KMeansSolver(n_clusters=2)
     solver.fit(sample_data)
     score = solver._compute_silhouette_score(sample_data)
-    assert isinstance(score, float)
+    if not isinstance(score, float):
+        raise AssertionError("Silhouette score is not a float value")

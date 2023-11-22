@@ -13,10 +13,13 @@ def test_l0bnb_regression():
     l0bnb_reg = L0BnBRegression(lambda_2=0.01, max_nonzeros=10)
     l0bnb_reg.fit(X, y)
 
-    # Assert that solutions are found
-    assert len(l0bnb_reg.model.coefficients) > 0
-    assert l0bnb_reg.model is not None
+    # Test that solutions are found
+    if len(l0bnb_reg.model.coefficients) == 0:
+        raise AssertionError("L0BnBRegression model did not find any coefficients")
+    if l0bnb_reg.model is None:
+        raise AssertionError("L0BnBRegression model is not initialized")
 
     # Test predictions
     predictions = l0bnb_reg.predict(X)
-    assert len(predictions) == len(y)
+    if len(predictions) != len(y):
+        raise AssertionError("Number of predictions does not match number of samples")

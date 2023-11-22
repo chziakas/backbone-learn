@@ -16,6 +16,5 @@ def test_linear_regression_selector():
     expected_utilities = np.array([2])
 
     # Verify that calculated utilities match expected values
-    assert np.allclose(
-        utilities, expected_utilities
-    ), f"Expected utilities {expected_utilities}, got {utilities}"
+    if not np.allclose(utilities, expected_utilities):
+        raise AssertionError(f"Expected utilities {expected_utilities}, got {utilities}")
