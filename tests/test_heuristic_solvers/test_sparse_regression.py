@@ -38,7 +38,7 @@ def test_get_significant_features():
 
 def test_lasso_regression_predict():
     X_train, y_train = make_regression(n_samples=100, n_features=4, random_state=42)
-    X_test, y_test = make_regression(n_samples=20, n_features=4, random_state=42)
+    X_test, _ = make_regression(n_samples=20, n_features=4, random_state=42)
 
     model = LassoRegression()
     model.fit(X_train, y_train)

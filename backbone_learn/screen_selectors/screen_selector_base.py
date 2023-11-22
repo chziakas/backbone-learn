@@ -46,7 +46,7 @@ class ScreenSelectorBase(VariableSelector):
         Returns:
             np.ndarray: The selected feature matrix.
         """
-        n_samples, n_features = X.shape
+        n_features = X.shape[1]
 
         # Calculate utilities if not already done
         if self.utilities is None:

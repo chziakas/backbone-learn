@@ -35,7 +35,7 @@ def test_cart_decision_tree_predict():
     X_train, y_train = make_classification(
         n_samples=100, n_features=4, n_classes=2, random_state=42
     )
-    X_test, y_test = make_classification(n_samples=20, n_features=4, n_classes=2, random_state=42)
+    X_test, _ = make_classification(n_samples=20, n_features=4, n_classes=2, random_state=42)
 
     model = CARTDecisionTree()
     model.fit(X_train, y_train)

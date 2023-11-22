@@ -22,7 +22,6 @@ def test_initialization():
 
 def test_set_solvers(sample_data):
     """Test the set_solvers method with sample data."""
-    X, y = sample_data
     backbone = BackboneDecisionTree()
     backbone.set_solvers(
         alpha=0.5, depth=3, time_limit=1000, _lambda=0.5, num_threads=1, obj_mode="acc", n_bins=2
