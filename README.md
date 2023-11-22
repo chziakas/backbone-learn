@@ -1,7 +1,6 @@
 
 ## Overview
-We present *BackboneLearn*: an open-source software package and framework for scaling mixed integer optimization (MIO) problems with indicator variables to high-dimensional problems.
-*BackboneLearn* solves fundamental problems in interpretable supervised learning including sparse regression and decision trees, in unsupervised learning including clustering, and beyond, all of which can naturally be formulated using the aforementioned optimization paradigm. The package is built in Python and is user-friendly and easily extendible: users can directly implement a backbone algorithm for their MIO problem at hand.
+*BackboneLearn* is an open-source software package and framework for scaling mixed integer optimization (MIO) problems with indicator variables to high-dimensional problems. This optimization paradigm can naturally be used to formulate fundamental problems in interpretable supervised learning (e.g., sparse regression and decision trees), in unsupervised learning (e.g., clustering), and beyond; *BackboneLearn* solves the aforementioned problems faster than exact methods and with higher accuracy than commonly used heuristics, while also scaling to large problem sizes. The package is built in Python and is user-friendly and easily extendible: users can directly implement a backbone algorithm for their MIO problem at hand.
 
 #### What do we mean by indicators?
 Indicators are binary variables that are part of the MIO problem we use to train the aforementioned models.
