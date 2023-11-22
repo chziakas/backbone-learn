@@ -1,9 +1,9 @@
 import time
 from itertools import product
 
+import numpy as np
 from sklearn.datasets import make_blobs
 from utils import save_results
-import numpy as np
 
 from backbone_learn.backbone.backbone_clustering import BackboneClustering
 from backbone_learn.heuristic_solvers.kmeans_solver import KMeansSolver
@@ -12,9 +12,9 @@ from backbone_learn.heuristic_solvers.kmeans_solver import KMeansSolver
 beta_range = [1.0]
 num_subproblems_range = [3, 5, 10]
 num_iterations_range = [1]
-n_clusters_range = [5]
+n_clusters_range = [2]
 n_features_range = [2]
-n_samples_range = [50,200]
+n_samples_range = [50]
 
 # Constants
 random_state = 17
@@ -27,11 +27,9 @@ results = []
 for n_samples, n_clusters, n_features in product(
     n_samples_range, n_clusters_range, n_features_range
 ):
-    # Generate synthetic data
-    # X, _ = make_blobs(
-    #     n_samples=n_samples, centers=n_clusters, n_features=n_features, random_state=random_state
-    # )
-    X, _ = make_blobs(n_samples=n_samples, n_features=n_features, cluster_std=1.0, random_state=random_state)
+    X, _ = make_blobs(
+        n_samples=n_samples, n_features=n_features, cluster_std=1.0, random_state=random_state
+    )
     X = np.random.rand(n_samples, 2) - 0.5 + X
 
     # KMeansSolver model iteration (labeled as 'heuristic')

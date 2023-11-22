@@ -22,7 +22,7 @@ Note: For ODT implementations, please follow the instructions described in the l
 ### Example Usage
 Here are some example usages of BackboneLearn for different tasks that you could find in 'notebooks':
 
-#### Sparse Regression
+#### Sparse Regression with L0BnB Model
 ```python
 from backbone_learn.backbone.backbone_sparse_regression import BackboneSparseRegression
 # Initialize BackboneSparseRegression
@@ -33,7 +33,18 @@ backbone.fit(X, y)
 y_pred = backbone.predict(X)
 ```
 
-#### Clustering
+#### Decision Trees with BendersOCT Model
+```python
+from backbone_learn.backbone.backbone_decision_tree import BackboneDecisionTree
+# Initialize BackboneDecisionTree
+backbone = BackboneDecisionTree(alpha=0.5, beta=0.5, num_subproblems=5, num_iterations=1, depth=3, _lambda=0.5)
+# Fit the model
+backbone.fit(X, y)
+# Make predictions
+y_pred = backbone.predict(X)
+```
+
+#### Clustering with MIO Formulation Model
 ```python
 from backbone_learn.backbone.backbone_clustering import BackboneClustering
 # Initialize BackboneClustering
