@@ -102,7 +102,7 @@ predictions = backbone_algorithm.predict(X_new)
 ```
 
 ## Citing BackboneLearn
-If you find L0Learn useful in your research, please consider citing the following papers.
+If you find BackboneLearn useful in your research, please consider citing the following papers.
 
 Paper 1 (Toolkit):
 
