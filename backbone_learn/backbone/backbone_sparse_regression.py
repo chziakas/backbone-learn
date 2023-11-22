@@ -22,8 +22,10 @@ class BackboneSparseRegression(BackboneSupervised):
 
         Args:
             alpha (float): Proportion of features to retain after screening.
-            lambda_2 (float, optional): Regularization parameter lambda_2 in the L0BnB model, controlling the trade-off between the model's complexity and fit. Defaults to 0.001.
-            max_nonzeros (int, optional): Maximum number of non-zero coefficients the model is allowed to have, enforcing sparsity. Defaults to 10.
+            lambda_2 (float, optional): Regularization parameter lambda_2 in the L0BnB model, controlling the trade-off
+                between the model's complexity and fit. Defaults to 0.001.
+            max_nonzeros (int, optional): Maximum number of non-zero coefficients the model is allowed to have,
+                 enforcing sparsity. Defaults to 10.
             time_limit (int): Time limit for the optimization process.
         """
         self.screen_selector = PearsonCorrelationSelector(alpha)

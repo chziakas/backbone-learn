@@ -157,7 +157,8 @@ class BackboneBase(ABC):
 
         X_selected = self.preprocessing_backbone(X_selected)
         logging.info(
-            f"Backbone construction with heuristic solver started for iterations:{self.num_iterations}, subproblems:{self.num_subproblems} , and beta:{self.beta}"
+            f"""Backbone construction with heuristic solver started for iterations:{self.num_iterations},
+            subproblems:{self.num_subproblems} , and beta:{self.beta}"""
         )
         backbone_sets = []
         for i in range(self.num_iterations):

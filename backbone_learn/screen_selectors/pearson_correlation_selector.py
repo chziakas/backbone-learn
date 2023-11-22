@@ -12,7 +12,7 @@ class PearsonCorrelationSelector(ScreenSelectorBase):
         """
         Calculate utilities based on Pearson correlation.
         """
-        n_samples, n_features = X.shape
+        n_features = X.shape[1]
         utilities = np.zeros(n_features)
 
         y_mean = PearsonCorrelationSelector.compute_mean(y)

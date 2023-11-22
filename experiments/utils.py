@@ -6,11 +6,13 @@ def save_results(results, filename):
     """
     Saves the provided results to a file in JSON format.
 
-    This function takes a dictionary of results and a filename, then writes the results to the specified file in the same directory as the script. The results are stored in JSON format with an indentation of 4 spaces for readability.
+    This function takes a dictionary of results and a filename, then writes the results to the specified file in
+    the same directory as the script. The results are stored in JSON format with an indentation of 4 spaces for readability.
 
     Args:
         results (dict): A dictionary containing the results data to be saved.
-        filename (str): The name of the file where the results will be saved. The file will be created in the same directory as the script.
+        filename (str): The name of the file where the results will be saved. The file will be created in the same
+            directory as the script.
 
     Raises:
         IOError: If the file cannot be opened or written to.

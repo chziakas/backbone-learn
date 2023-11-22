@@ -11,7 +11,8 @@ class L0BnBRegressionModel:
     Attributes:
         coefficients (np.ndarray or None): Coefficients of the regression model. None before the model is fitted.
         intercept (float or None): Intercept of the regression model. None before the model is fitted.
-        lambda_2 (float): Regularization parameter lambda_2 in the L0BnB model, controlling the trade-off between the model's complexity and fit.
+        lambda_2 (float): Regularization parameter lambda_2 in the L0BnB model, controlling the trade-off between
+            the model's complexity and fit.
         max_nonzeros (int): Maximum number of non-zero coefficients the model is allowed to have, enforcing sparsity.
     """
 
