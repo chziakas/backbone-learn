@@ -30,6 +30,9 @@ jobs:
     - name: Install dependencies
       run: |
         poetry install
+    - name: Install odtlearn from GitHub
+      run: |
+        pip install git+https://github.com/D3M-Research-Group/odtlearn.git#egg=odtlearn
 
     - name: Run pytest
       run: |
