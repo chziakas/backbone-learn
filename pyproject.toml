@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "backbone-learn"
-version = "0.1.2"
-description = "A Library for Scaling Interpretable and Exact Machine Learning."
+version = "0.1.3"
+description = "A Library for Scaling Mixed-Integer Optimization-Based Machine Learning."
 authors = ["Christos Ziakas, Vassilis Digalakis Jr."]
 readme = "README.md"
 
