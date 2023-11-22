@@ -10,7 +10,7 @@ Indicators are binary variables that are part of the MIO problem we use to train
 - Clustering: An indicator represents whether a pair of data points are in the same cluster, being nonzero if they are clustered together.
 
 ## BackboneLearn
-The backbone framework, upon which *BackboneLearn* is built, operates in two phases: we first extract a “backbone set” of potentially ``relevant indicators'' (i.e., indicators that are nonzero in the optimal solution) by solving a number of specially chosen, tractable subproblems; we then use traditional techniques to solve a reduced problem to optimality or near-optimality, considering only the backbone indicators. A screening step often proceeds the first phase, to discard indicators that are almost surely irrelevant.
+The backbone framework, upon which *BackboneLearn* is built, operates in two phases: we first extract a “backbone set” of potentially ``relevant indicators'' (i.e., indicators that are nonzero in the optimal solution) by solving a number of specially chosen, tractable subproblems; we then use traditional techniques to solve a reduced problem to optimality or near-optimality, considering only the backbone indicators. A screening step often proceeds the first phase, to discard indicators that are almost surely irrelevant. For more details, check the paper by Bertsimas and Digalakis Jr (2022) <https://doi.org/10.1007/s10994-021-06123-2>.
 
 ### Getting Started
 ### Installation
@@ -100,6 +100,26 @@ backbone_algorithm.fit(X, y)
 # Make predictions
 predictions = backbone_algorithm.predict(X_new)
 ```
+
+## Citing BackboneLearn
+If you find L0Learn useful in your research, please consider citing the following papers.
+
+Paper 1 (Toolkit):
+
+Coming soon
+
+Paper 2 Methodology:
+
+@article{bertsimas2022backbone,
+  title={The backbone method for ultra-high dimensional sparse machine learning},
+  author={Bertsimas, Dimitris and Digalakis Jr, Vassilis},
+  journal={Machine Learning},
+  volume={111},
+  number={6},
+  pages={2161--2212},
+  year={2022},
+  publisher={Springer}
+}
 
 ## License
 [Apache License 2.0](LICENSE)
