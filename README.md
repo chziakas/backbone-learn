@@ -4,9 +4,9 @@
 
 #### What do we mean by indicators?
 Indicators are binary variables that are part of the MIO problem we use to train the aforementioned models.
-- Sparse regression: Each regression coefficient (and the corresponding feature) is paired with an indicator, which is 1 if the coefficient is nonzero and 0 otherwise.
-- Decision trees: An indicator corresponds to a feature in a decision tree node, being nonzero if that feature is chosen for branching at that node.
-- Clustering: An indicator represents whether a pair of data points are in the same cluster, being nonzero if they are clustered together.
+-  Sparse regression: Each regression coefficient (and the corresponding feature) is paired with an indicator, which is 1 if the coefficient is nonzero and 0 otherwise.
+-  Decision trees: An indicator corresponds to a feature in a decision tree node, being nonzero if that feature is chosen for branching at that node.
+-  Clustering: An indicator represents whether a pair of data points are in the same cluster, being nonzero if they are clustered together.
 
 ## BackboneLearn
 The backbone framework, upon which *BackboneLearn* is built, operates in two phases: we first extract a “backbone set” of potentially ``relevant indicators'' (i.e., indicators that are nonzero in the optimal solution) by solving a number of specially chosen, tractable subproblems; we then use traditional techniques to solve a reduced problem to optimality or near-optimality, considering only the backbone indicators. A screening step often proceeds the first phase, to discard indicators that are almost surely irrelevant. For more details, check the paper by Bertsimas and Digalakis Jr (2022) <https://doi.org/10.1007/s10994-021-06123-2>.
@@ -72,22 +72,22 @@ python experiments/benchmark_clustering.py
 ## Custom Implementation Guide
 Follow these steps to implement your backbone algorithms in *BackboneLearn*:
 ### Custom Screening Method
-- Extend `ScreenSelectorBase` in 'backbone_learn/screen_selector'.
-- Implement the `calculate_utilities` method, which computes utilities (or importances) for each feature based on your screening criteria. Features with the lowest scores may be candidates for elimination. The number of features to keep is defined as a fraction of the total features (`alpha * n_features`).
+-  Extend `ScreenSelectorBase` in 'backbone_learn/screen_selector'.
+-  Implement the `calculate_utilities` method, which computes utilities (or importances) for each feature based on your screening criteria. Features with the lowest scores may be candidates for elimination. The number of features to keep is defined as a fraction of the total features (`alpha * n_features`).
 
 ### Custom Heuristic Method
-- Extend `HeuristicSolverBase` in 'backbone_learn/heuristic_solvers'.
-- Implement `fit` and `get_relevant_features`. The `fit` method trains a model within each subproblem, which needs to be highly efficient. This function fits a sparse model (regression, trees, etc.) to the data inputs of the subproblem. The `get_relevant_features` method identifies and extracts all features deemed relevant by the model. Ensure to add any necessary parameters in the `init` or `fit` method and pass them to the backbone. The fraction of features to include in the feature set for each subproblem is defined by 'beta'. The number of subproblems and iterations are defined by 'num_subproblems' and 'n_iterations', accordingly.
+-  Extend `HeuristicSolverBase` in 'backbone_learn/heuristic_solvers'.
+-  Implement `fit` and `get_relevant_features`. The `fit` method trains a model within each subproblem, which needs to be highly efficient. This function fits a sparse model (regression, trees, etc.) to the data inputs of the subproblem. The `get_relevant_features` method identifies and extracts all features deemed relevant by the model. Ensure to add any necessary parameters in the `init` or `fit` method and pass them to the backbone. The fraction of features to include in the feature set for each subproblem is defined by 'beta'. The number of subproblems and iterations are defined by 'num_subproblems' and 'n_iterations', accordingly.
 
 ### Custom Exact Solver
-- Extend `ExactSolverBase` in 'backbone_learn/exact_solvers'.
-- Implement `fit` and `predict` methods. The `fit` function is applied to the reduced backbone set and does not need to be efficient; instead, it should use a method with optimality guarantees. The model parameters can again be defined in `init` and passed in the backbone class. The `predict` function ensures that the model can be used for prediction.
+-  Extend `ExactSolverBase` in 'backbone_learn/exact_solvers'.
+-  Implement `fit` and `predict` methods. The `fit` function is applied to the reduced backbone set and does not need to be efficient; instead, it should use a method with optimality guarantees. The model parameters can again be defined in `init` and passed in the backbone class. The `predict` function ensures that the model can be used for prediction.
 
 ### Custom Backbone Algorithm
-- Extend `BackboneSupervised` for supervised algorithms or `BackboneUnsupervised` for unsupervised algorithms in 'backbone_learn/backbone'. The supervised algorithms perform feature selection, while the unsupervised algorithms perform data selection.
-- Implement `set_solvers`. Add your customized screen selector, heuristic solver, and exact solver as class instances. It's optional to define a screen selector and heuristic solver. Parameters for each solver are recommended to be passed manually. See examples in `backbone_learn/backbone/backbone_decision_tree`.
+-  Extend `BackboneSupervised` for supervised algorithms or `BackboneUnsupervised` for unsupervised algorithms in 'backbone_learn/backbone'. The supervised algorithms perform feature selection, while the unsupervised algorithms perform data selection.
+-  Implement `set_solvers`. Add your customized screen selector, heuristic solver, and exact solver as class instances. It's optional to define a screen selector and heuristic solver. Parameters for each solver are recommended to be passed manually. See examples in `backbone_learn/backbone/backbone_decision_tree`.
 
-###  Example Usage for Customized Backbone Algorithm
+### Example Usage for Customized Backbone Algorithm
 Here's an example of how you can crate a custom Backbone algorithm for supervised method:
 ```python
 class CustomBackboneAlgorithm(BackboneSupervised):

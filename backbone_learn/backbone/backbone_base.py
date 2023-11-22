@@ -74,7 +74,7 @@ class BackboneBase(ABC):
         """Utilize variables based on the learning method."""
 
     @abstractmethod
-    def preprocessing_predict(self, X: np.ndarray, variables_exact_idx: List[int]) -> np.ndarray:
+    def preprocessing_predict(self, X: np.ndarray) -> np.ndarray:
         """Preprocess data for making predictions based on the learning method."""
 
     @abstractmethod
@@ -160,8 +160,8 @@ class BackboneBase(ABC):
             f"Backbone construction with heuristic solver started for iterations:{self.num_iterations}, subproblems:{self.num_subproblems} , and beta:{self.beta}"
         )
         backbone_sets = []
-        for iter in range(self.num_iterations):
-            logging.info(f"Iteration {iter + 1} started.")
+        for i in range(self.num_iterations):
+            logging.info(f"Iteration {i + 1} started.")
             constructor = SubproblemConstructor(utilities, self.beta, self.num_subproblems)
             subproblems = constructor.construct_subproblems()
             for sub, feature_idx in enumerate(subproblems):
@@ -173,7 +173,7 @@ class BackboneBase(ABC):
                 self.heuristic_solver.fit(subset, y, random_state=sub)
                 rel_variables_global = self.get_relevant_variables(feature_idx, self.threshold)
                 backbone_sets.append(rel_variables_global)
-            logging.info(f"Iteration {iter + 1} completed.")
+            logging.info(f"Iteration {i + 1} completed.")
         backbone_set = self.build_backbone_set(backbone_sets)
         if self.screen_selector is None:
             logging.info(f"Backbone set idx: {backbone_set}")

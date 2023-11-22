@@ -111,5 +111,5 @@ class BendersOCTDecisionTree(ExactSolverBase):
         if self.is_data_fit:
             X_preprocessed = X
         else:
-            X_preprocessed = self.fit_preprocessors(X)
+            X_preprocessed = self.preprocess_features(X)
         return self._model.predict(X_preprocessed)

@@ -18,17 +18,6 @@ def test_backbone_sparse_regression_predict():
     backbone.fit(X, y)
     predictions = backbone.predict(X)
 
-    assert len(predictions) == len(y), "Prediction length mismatch"
-
-
-def test_backbone_sparse_regression_predict():
-    X, y = make_regression(
-        n_samples=100, n_features=50, n_informative=20, noise=0.1, random_state=42
-    )
-    backbone = BackboneSparseRegression(alpha=0.5, beta=0.3, num_subproblems=2)
-    backbone.fit(X, y)
-    predictions = backbone.predict(X)
-
     # Asserts to validate the predictions
     assert len(predictions) == len(y), "Prediction length mismatch"
 

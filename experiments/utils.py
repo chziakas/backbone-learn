@@ -42,5 +42,3 @@ def load_results(filename):
             return json.load(file)
     except FileNotFoundError:
         return []
-    except json.JSONDecodeError as e:
-        raise json.JSONDecodeError(f"Error decoding JSON from {filename}: {e}")
