@@ -116,20 +116,29 @@ If you find BackboneLearn useful in your research, please consider citing the fo
 
 Paper 1 (Toolkit):
 
-Coming soon
+>    @article{     
+>>         digalakis2023backbonelearn,  
+>>         title={BackboneLearn: A Library for Scaling Mixed-Integer Optimization-Based Machine Learning},   
+>>         author={Vassilis Digalakis Jr au2 and Christos Ziakas},  
+>>         year={2023},  
+>>         eprint={2311.13695},  
+>>         archivePrefix={arXiv},  
+>>         primaryClass={cs.LG}  
+>    }
 
 Paper 2 Methodology:
 
-@article{bertsimas2022backbone,
-  title={The backbone method for ultra-high dimensional sparse machine learning},
-  author={Bertsimas, Dimitris and Digalakis Jr, Vassilis},
-  journal={Machine Learning},
-  volume={111},
-  number={6},
-  pages={2161--2212},
-  year={2022},
-  publisher={Springer}
-}
+>    @article{  
+>>         bertsimas2022backbone,  
+>>         title={The backbone method for ultra-high dimensional sparse machine learning},  
+>>         author={Bertsimas, Dimitris and Digalakis Jr, Vassilis},  
+>>         journal={Machine Learning},  
+>>         volume={111},  
+>>         number={6},  
+>>         pages={2161--2212},  
+>>         year={2022},   
+>>         publisher={Springer}  
+>    }
 
 ## License
 [Apache License 2.0](LICENSE)
