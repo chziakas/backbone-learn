@@ -1,18 +1,34 @@
+<div align="center">
+
+# BackboneLearn: A Library for Scaling Mixed-Integer Optimization-Based Machine Learning
+
+[![Paper](https://img.shields.io/badge/arXiv-2211.11747-red)](https://arxiv.org/abs/2311.13695)
+[![API](https://img.shields.io/website-up-down-green-red/http/monip.org.svg)](http://backbone-learn.readthedocs.io)
+[![PyPI package](https://badge.fury.io/py/backbone-learn.svg)](https://pypi.org/project/backbone-learn/)
+
+
+</div>
 
 ## Overview
+
 *BackboneLearn* is an open-source software package and framework for scaling mixed integer optimization (MIO) problems with indicator variables to high-dimensional problems. This optimization paradigm can naturally be used to formulate fundamental problems in interpretable supervised learning (e.g., sparse regression and decision trees), in unsupervised learning (e.g., clustering), and beyond; *BackboneLearn* solves the aforementioned problems faster than exact methods and with higher accuracy than commonly used heuristics, while also scaling to large problem sizes. The package is built in Python and is user-friendly and easily extendible: users can directly implement a backbone algorithm for their MIO problem at hand.
 
-#### What do we mean by indicators?
+### What do we mean by indicators?
+
 Indicators are binary variables that are part of the MIO problem we use to train the aforementioned models.
--  Sparse regression: Each regression coefficient (and the corresponding feature) is paired with an indicator, which is 1 if the coefficient is nonzero and 0 otherwise.
--  Decision trees: An indicator corresponds to a feature in a decision tree node, being nonzero if that feature is chosen for branching at that node.
--  Clustering: An indicator represents whether a pair of data points are in the same cluster, being nonzero if they are clustered together.
+
+*   Sparse regression: Each regression coefficient (and the corresponding feature) is paired with an indicator, which is 1 if the coefficient is nonzero and 0 otherwise.
+*   Decision trees: An indicator corresponds to a feature in a decision tree node, being nonzero if that feature is chosen for branching at that node.
+*   Clustering: An indicator represents whether a pair of data points are in the same cluster, being nonzero if they are clustered together.
 
 ## BackboneLearn
+
 The backbone framework, upon which *BackboneLearn* is built, operates in two phases: we first extract a “backbone set” of potentially ``relevant indicators'' (i.e., indicators that are nonzero in the optimal solution) by solving a number of specially chosen, tractable subproblems; we then use traditional techniques to solve a reduced problem to optimality or near-optimality, considering only the backbone indicators. A screening step often proceeds the first phase, to discard indicators that are almost surely irrelevant. For more details, check the paper by Bertsimas and Digalakis Jr (2022) <https://doi.org/10.1007/s10994-021-06123-2>.
 
-### Getting Started
+## Getting Started
+
 ### Installation
+
 Install BackboneLearn using pip:
 ```python
 pip install backbone-learn
@@ -23,6 +39,7 @@ Note: For ODT implementations, please follow the instructions described in the l
 Here are some example usages of BackboneLearn for different tasks that you could find in 'notebooks':
 
 #### Sparse Regression with L0BnB Model
+
 ```python
 from backbone_learn.backbone.backbone_sparse_regression import BackboneSparseRegression
 # Initialize BackboneSparseRegression
@@ -34,6 +51,7 @@ y_pred = backbone.predict(X)
 ```
 
 #### Decision Trees with BendersOCT Model
+
 ```python
 from backbone_learn.backbone.backbone_decision_tree import BackboneDecisionTree
 # Initialize BackboneDecisionTree
@@ -45,6 +63,7 @@ y_pred = backbone.predict(X)
 ```
 
 #### Clustering with MIO Formulation Model
+
 ```python
 from backbone_learn.backbone.backbone_clustering import BackboneClustering
 # Initialize BackboneClustering
@@ -56,6 +75,7 @@ y_pred = backbone.predict(X)
 ```
 
 ### Running Simulations
+
 To run benchmark simulations, please follow these commands and change the hyper-parameters for each script in 'experiments':
 
 ```bash
@@ -70,25 +90,33 @@ python experiments/benchmark_clustering.py
 ```
 
 ## Custom Implementation Guide
+
 Follow these steps to implement your backbone algorithms in *BackboneLearn*:
+
 ### Custom Screening Method
--  Extend `ScreenSelectorBase` in 'backbone_learn/screen_selector'.
--  Implement the `calculate_utilities` method, which computes utilities (or importances) for each feature based on your screening criteria. Features with the lowest scores may be candidates for elimination. The number of features to keep is defined as a fraction of the total features (`alpha * n_features`).
+
+*   Extend `ScreenSelectorBase` in 'backbone_learn/screen_selector'.
+*   Implement the `calculate_utilities` method, which computes utilities (or importances) for each feature based on your screening criteria. Features with the lowest scores may be candidates for elimination. The number of features to keep is defined as a fraction of the total features (`alpha * n_features`).
 
 ### Custom Heuristic Method
--  Extend `HeuristicSolverBase` in 'backbone_learn/heuristic_solvers'.
--  Implement `fit` and `get_relevant_features`. The `fit` method trains a model within each subproblem, which needs to be highly efficient. This function fits a sparse model (regression, trees, etc.) to the data inputs of the subproblem. The `get_relevant_features` method identifies and extracts all features deemed relevant by the model. Ensure to add any necessary parameters in the `init` or `fit` method and pass them to the backbone. The fraction of features to include in the feature set for each subproblem is defined by 'beta'. The number of subproblems and iterations are defined by 'num_subproblems' and 'n_iterations', accordingly.
+
+*   Extend `HeuristicSolverBase` in 'backbone_learn/heuristic_solvers'.
+*   Implement `fit` and `get_relevant_features`. The `fit` method trains a model within each subproblem, which needs to be highly efficient. This function fits a sparse model (regression, trees, etc.) to the data inputs of the subproblem. The `get_relevant_features` method identifies and extracts all features deemed relevant by the model. Ensure to add any necessary parameters in the `init` or `fit` method and pass them to the backbone. The fraction of features to include in the feature set for each subproblem is defined by 'beta'. The number of subproblems and iterations are defined by 'num_subproblems' and 'n_iterations', accordingly.
 
 ### Custom Exact Solver
--  Extend `ExactSolverBase` in 'backbone_learn/exact_solvers'.
--  Implement `fit` and `predict` methods. The `fit` function is applied to the reduced backbone set and does not need to be efficient; instead, it should use a method with optimality guarantees. The model parameters can again be defined in `init` and passed in the backbone class. The `predict` function ensures that the model can be used for prediction.
+
+*   Extend `ExactSolverBase` in 'backbone_learn/exact_solvers'.
+*   Implement `fit` and `predict` methods. The `fit` function is applied to the reduced backbone set and does not need to be efficient; instead, it should use a method with optimality guarantees. The model parameters can again be defined in `init` and passed in the backbone class. The `predict` function ensures that the model can be used for prediction.
 
 ### Custom Backbone Algorithm
--  Extend `BackboneSupervised` for supervised algorithms or `BackboneUnsupervised` for unsupervised algorithms in 'backbone_learn/backbone'. The supervised algorithms perform feature selection, while the unsupervised algorithms perform data selection.
--  Implement `set_solvers`. Add your customized screen selector, heuristic solver, and exact solver as class instances. It's optional to define a screen selector and heuristic solver. Parameters for each solver are recommended to be passed manually. See examples in `backbone_learn/backbone/backbone_decision_tree`.
+
+*   Extend `BackboneSupervised` for supervised algorithms or `BackboneUnsupervised` for unsupervised algorithms in 'backbone_learn/backbone'. The supervised algorithms perform feature selection, while the unsupervised algorithms perform data selection.
+*   Implement `set_solvers`. Add your customized screen selector, heuristic solver, and exact solver as class instances. It's optional to define a screen selector and heuristic solver. Parameters for each solver are recommended to be passed manually. See examples in `backbone_learn/backbone/backbone_decision_tree`.
 
 ### Example Usage for Customized Backbone Algorithm
+
 Here's an example of how you can crate a custom Backbone algorithm for supervised method:
+
 ```python
 class CustomBackboneAlgorithm(BackboneSupervised):
     def set_solvers(self, **kwargs):
@@ -99,7 +127,9 @@ class CustomBackboneAlgorithm(BackboneSupervised):
          # Init exact solver
         self.exact_solver = CustomExactSolver(**kwarg)
 ```
+
 Here's how you can use the custom Backbone algorithm:
+
 ```python
 # Initialize with custom parameters
 backbone_algorithm = CustomBackboneAlgorithm(alpha=0.5, beta=0.3, num_subproblems=3,**kwarg)
@@ -111,34 +141,42 @@ backbone_algorithm.fit(X, y)
 predictions = backbone_algorithm.predict(X_new)
 ```
 
+## Contributing
+
+We welcome contributions to BackboneLearn! Whether it's improving the code, fixing bugs, or enhancing documentation, every contribution is valuable. Please refer to our [CONTRIBUTING.md](CONTRIBUTING.md) for detailed information on how you can contribute.
+
+## Code of Conduct
+
+In our commitment to fostering an inclusive and respectful community, we expect all participants to adhere to our Code of Conduct. Please read the [Code of Conduct](CONDUCT.md) to understand the expectations for all those who interact within the BackboneLearn community.
+
 ## Citing BackboneLearn
+
 If you find BackboneLearn useful in your research, please consider citing the following papers.
 
 Paper 1 (Toolkit):
 
->    @article{     
->>         digalakis2023backbonelearn,  
->>         title={BackboneLearn: A Library for Scaling Mixed-Integer Optimization-Based Machine Learning},   
->>         author={Vassilis Digalakis Jr au2 and Christos Ziakas},  
->>         year={2023},  
->>         eprint={2311.13695},  
->>         archivePrefix={arXiv},  
->>         primaryClass={cs.LG}  
->    }
+> @article{digalakis2023backbonelearn,
+>   title={BackboneLearn: A Library for Scaling Mixed-Integer Optimization-Based Machine Learning},
+>   author={Vassilis Digalakis Jr au2 and Christos Ziakas},
+>   year={2023},
+>   eprint={2311.13695},
+>   archivePrefix={arXiv},
+>   primaryClass={cs.LG}
+> }
 
 Paper 2 Methodology:
 
->    @article{  
->>         bertsimas2022backbone,  
->>         title={The backbone method for ultra-high dimensional sparse machine learning},  
->>         author={Bertsimas, Dimitris and Digalakis Jr, Vassilis},  
->>         journal={Machine Learning},  
->>         volume={111},  
->>         number={6},  
->>         pages={2161--2212},  
->>         year={2022},   
->>         publisher={Springer}  
->    }
+> @article{bertsimas2022backbone,
+>   title={The backbone method for ultra-high dimensional sparse machine learning},
+>   author={Bertsimas, Dimitris and Digalakis Jr, Vassilis},
+>   journal={Machine Learning},
+>   volume={111},
+>   number={6},
+>   pages={2161--2212},
+>   year={2022},
+>   publisher={Springer}
+> }
 
 ## License
-[Apache License 2.0](LICENSE)
+
+[MIT License](LICENSE)

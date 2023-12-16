@@ -1,3 +1,6 @@
+# Copyright (c) 2023 Vassilis Digalakis Jr, Christos Ziakas
+# Licensed under the MIT License.
+
 import logging
 from abc import ABC, abstractmethod
 from typing import List, Tuple

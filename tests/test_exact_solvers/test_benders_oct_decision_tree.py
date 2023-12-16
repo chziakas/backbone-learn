@@ -1,3 +1,6 @@
+# Copyright (c) 2023 Vassilis Digalakis Jr, Christos Ziakas
+# Licensed under the MIT License.
+
 import numpy as np
 from sklearn.preprocessing import KBinsDiscretizer, OneHotEncoder
 

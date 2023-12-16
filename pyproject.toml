@@ -16,6 +16,7 @@ seaborn = "^0.13.0"
 pulp = "^2.7.0"
 jupyter = "^1.0.0"
 ipykernel = "^6.26.0"
+sphinx = "^7.2.6"
 
 
 [tool.poetry.group.dev.dependencies]

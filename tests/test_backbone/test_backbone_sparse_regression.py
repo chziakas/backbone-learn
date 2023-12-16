@@ -1,3 +1,6 @@
+# Copyright (c) 2023 Vassilis Digalakis Jr, Christos Ziakas
+# Licensed under the MIT License.
+
 from sklearn.datasets import make_regression
 
 from backbone_learn.backbone.backbone_sparse_regression import BackboneSparseRegression

@@ -1,3 +1,6 @@
+# Copyright (c) 2023 Vassilis Digalakis Jr, Christos Ziakas
+# Licensed under the MIT License.
+
 from ..exact_solvers.mio_clustering import MIOClustering
 from ..heuristic_solvers.kmeans_solver import KMeansSolver
 from .backbone_unsupervised import BackboneUnsupervised

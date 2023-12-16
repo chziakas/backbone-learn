@@ -1,3 +1,6 @@
+# Copyright (c) 2023 Vassilis Digalakis Jr, Christos Ziakas
+# Licensed under the MIT License.
+
 from sklearn.datasets import make_classification
 
 from backbone_learn.heuristic_solvers.cart_decision_tree import CARTDecisionTree

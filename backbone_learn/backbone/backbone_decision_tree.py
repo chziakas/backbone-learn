@@ -1,3 +1,6 @@
+# Copyright (c) 2023 Vassilis Digalakis Jr, Christos Ziakas
+# Licensed under the MIT License.
+
 from ..exact_solvers.benders_oct_decision_tree import BendersOCTDecisionTree
 from ..heuristic_solvers.cart_decision_tree import CARTDecisionTree
 from ..screen_selectors.pearson_correlation_selector import PearsonCorrelationSelector

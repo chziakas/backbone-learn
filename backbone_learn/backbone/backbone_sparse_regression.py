@@ -1,3 +1,6 @@
+# Copyright (c) 2023 Vassilis Digalakis Jr, Christos Ziakas
+# Licensed under the MIT License.
+
 from ..exact_solvers.lobnb_regression import L0BnBRegression
 from ..heuristic_solvers.lasso_regression import LassoRegression
 from ..screen_selectors.pearson_correlation_selector import PearsonCorrelationSelector
