@@ -73,13 +73,9 @@ class CARTDecisionTree(HeuristicSolverBase):
         Returns:
             np.ndarray: An array of indices of relevant features.
         """
-        if self._model and hasattr(self._model, "feature_importances_"):
-            significant_indices = np.where(self._model.feature_importances_ > threshold)[0]
-            return significant_indices
-        else:
-            raise ValueError(
-                "Model has not been fitted yet or does not support feature importances."
-            )
+
+        significant_indices = np.where(self._model.feature_importances_ > threshold)[0]
+        return significant_indices
 
     def predict(self, X: np.ndarray) -> np.ndarray:
         """
@@ -91,7 +87,4 @@ class CARTDecisionTree(HeuristicSolverBase):
         Returns:
             np.ndarray: The predicted target labels.
         """
-        if self._model is None:
-            raise ValueError("The model has not been fitted yet.")
-
         return self._model.predict(X)

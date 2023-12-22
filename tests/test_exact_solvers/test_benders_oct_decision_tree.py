@@ -2,6 +2,7 @@
 # Licensed under the MIT License.
 
 import numpy as np
+from sklearn.datasets import make_classification
 from sklearn.preprocessing import KBinsDiscretizer, OneHotEncoder
 
 from backbone_learn.exact_solvers.benders_oct_decision_tree import BendersOCTDecisionTree
@@ -34,3 +35,31 @@ def test_fit_preprocessors():
         raise AssertionError("tree.est_X.n_bins_ is not set after fitting preprocessors")
     if tree.enc.categories_ is None:  # enc should be fitted
         raise AssertionError("tree.enc.categories_ is not set after fitting preprocessors")
+
+
+def test_predict_after_fitting_preprocessors():
+    X, y = make_classification(n_samples=100, n_features=5, random_state=42)
+    model = BendersOCTDecisionTree()
+    model.fit(X, y)
+    predictions = model.predict(X)
+    if len(predictions) != len(y):
+        raise AssertionError("Prediction length mismatch with input")
+
+
+def test_predict_after_fitting_preprocessors_fit():
+    X, y = make_classification(n_samples=100, n_features=5, random_state=42)
+    X_binary = (X > 0.5).astype(int)  # Convert to binary (0 or 1)
+    model = BendersOCTDecisionTree(is_data_fit=True)  # Set is_data_fit to True for testing
+    model.fit(X_binary, y)
+    predictions = model.predict(X_binary)
+    if len(predictions) != len(y):
+        raise AssertionError("Prediction length mismatch with input")
+
+
+def test_predict_after_fitting_preprocessors():
+    X, y = make_classification(n_samples=100, n_features=5, random_state=42)
+    model = BendersOCTDecisionTree(is_data_fit=False)
+    model.fit(X, y)
+    predictions = model.predict(X)
+    if len(predictions) != len(y):
+        raise AssertionError("Prediction length mismatch with input")

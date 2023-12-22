@@ -83,11 +83,9 @@ class LassoRegression(HeuristicSolverBase):
         Returns:
             np.ndarray: Indices of features whose coefficients are above the threshold.
         """
-        if self._model:
-            significant_indices = np.where(np.abs(self._model.coef_) > threshold)[0]
-            return significant_indices
-        else:
-            raise ValueError("Model has not been fitted yet.")
+
+        significant_indices = np.where(np.abs(self._model.coef_) > threshold)[0]
+        return significant_indices
 
     def predict(self, X: np.ndarray) -> np.ndarray:
         """
@@ -99,9 +97,6 @@ class LassoRegression(HeuristicSolverBase):
         Returns:
             np.ndarray: The predicted target values.
         """
-        if self._model is None:
-            raise ValueError("The model has not been fitted yet.")
-
         return self._model.predict(X)
 
     def keep_top_features(self, n_non_zeros: int) -> None:
@@ -111,8 +106,6 @@ class LassoRegression(HeuristicSolverBase):
         Args:
         n_non_zeros (int): Number of features to retain.
         """
-        if self._model is None:
-            raise ValueError("Model must be fitted before adjusting features.")
 
         # Get the absolute values of the coefficients
         coef_magnitude = np.abs(self._model.coef_)

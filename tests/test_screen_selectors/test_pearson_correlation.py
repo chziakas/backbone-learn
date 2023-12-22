@@ -78,3 +78,17 @@ def test_select_indices():
         raise AssertionError("Incorrect number of indices selected")
     if not np.array_equal(selected_indices, np.array([1, 2])):
         raise AssertionError("Selected indices do not match expected top two utilities")
+
+
+def test_calculate_utilities_with_zero_correlation():
+    # Create a dataset where features are uncorrelated with the target
+    np.random.seed(42)
+    X = np.random.rand(100, 5)  # 100 samples, 5 features
+    y = np.full(100, 0.5)  # Target variable, constant and therefore uncorrelated with X
+
+    selector = PearsonCorrelationSelector()
+    utilities = selector.calculate_utilities(X, y)
+
+    # Check if all calculated utilities are zero
+    if not np.all(utilities == 0):
+        raise AssertionError("Utilities should be zero for uncorrelated features and target")

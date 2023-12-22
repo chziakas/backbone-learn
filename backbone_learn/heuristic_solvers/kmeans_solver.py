@@ -5,6 +5,7 @@ from typing import List, Tuple
 
 import numpy as np
 from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score
 
 from .heauristic_solver_base import HeuristicSolverBase
 
@@ -108,8 +109,6 @@ class KMeansSolver(HeuristicSolverBase):
         Returns:
             float: The WCSS value.
         """
-        if self._model is None or not hasattr(self._model, "cluster_centers_"):
-            raise ValueError("The KMeans model must be fitted before calculating WCSS.")
         wcss = 0.0
         cluster_labels_pred = self._model.labels_
 
@@ -121,7 +120,9 @@ class KMeansSolver(HeuristicSolverBase):
 
     def _compute_silhouette_score(self, X: np.ndarray) -> float:
         """ """
-        from sklearn.metrics import silhouette_score
-
+        # Check if the number of unique clusters is 1 or equal to the number of samples
+        if len(set(self._model.labels_)) == 1 or len(X) == len(set(self._model.labels_)):
+            # Silhouette score cannot be computed in this case
+            return 0.0
         silhouette_avg = silhouette_score(X, self._model.labels_)
         return silhouette_avg

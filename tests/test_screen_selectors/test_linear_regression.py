@@ -18,3 +18,14 @@ def test_linear_regression_selector():
     # Verify that calculated utilities match expected values
     if not np.allclose(utilities, expected_utilities):
         raise AssertionError(f"Expected utilities {expected_utilities}, got {utilities}")
+
+
+# Test Utilities Calculation with Singular Matrix
+def test_utilities_with_singular_matrix():
+    selector = LinearRegressionSelector()
+    X = np.ones((10, 3))  # Singular matrix (not invertible)
+    y = np.random.rand(10)
+    utilities = selector.calculate_utilities(X, y)
+
+    if not np.all(utilities == 0):
+        raise AssertionError("Utilities should be zero for singular matrix")

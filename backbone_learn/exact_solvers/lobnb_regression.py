@@ -50,12 +50,6 @@ class L0BnBRegression(ExactSolverBase):
         Returns:
             np.ndarray: Predicted values based on the fitted model.
 
-        Raises:
-            ValueError: If the model has not been fitted yet.
         """
-        if self._model:
-            return self._model.predict(X)
-        else:
-            raise ValueError(
-                "The model has not been fitted yet. Please fit the model before making predictions."
-            )
+
+        return self._model.predict(X)

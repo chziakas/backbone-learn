@@ -31,10 +31,22 @@ jobs:
       run: |
         poetry install
 
-    - name: Install odtlearn from GitHub within Poetry Environment
+    - name: Install odtlearn from GitHub with Poetry Environment
       run: |
         poetry run pip install git+https://github.com/D3M-Research-Group/odtlearn.git#egg=odtlearn
+    - name: Install pytest-cov within Poetry Environment
+      run: |
+        poetry run pip install pytest-cov
 
     - name: Run pytest using Poetry
       run: |
-        poetry run pytest
+        poetry run pytest --cov=backbone_learn --cov-report=xml
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false

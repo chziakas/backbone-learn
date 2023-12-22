@@ -28,3 +28,28 @@ def test_fit_predict():
         raise AssertionError(
             "Number of unique assignments does not match expected number of clusters"
         )
+
+
+def test_euclidean_distance():
+    point1 = np.array([0, 0])
+    point2 = np.array([3, 4])
+    calculated_distance = MIOClustering.euclidean_distance(point1, point2)
+    expected_distance = 5
+    if not np.isclose(calculated_distance, expected_distance):
+        raise AssertionError("Euclidean distance calculation is incorrect")
+
+
+def test_extract_cluster_means():
+    X = np.array([[1, 2], [2, 3], [1, 2], [4, 5]])
+    # Simulate a scenario where the model has been fitted
+    mio_clustering = MIOClustering(n_clusters=2)
+    mio_clustering.y = np.array(
+        [[1, 0], [1, 0], [1, 0], [0, 1]]
+    )  # Assume first three points in cluster 0 and last point in cluster 1
+
+    cluster_means = mio_clustering.extract_cluster_means(X)
+    expected_means = np.array(
+        [[4 / 3, 7 / 3], [4, 5]]  # Mean of the first three points  # Mean of the last point
+    )
+    if not np.allclose(cluster_means, expected_means):
+        raise AssertionError("Cluster means calculation is incorrect")

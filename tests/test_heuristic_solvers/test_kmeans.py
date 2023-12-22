@@ -59,3 +59,11 @@ def test_compute_silhouette_score(sample_data):
     score = solver._compute_silhouette_score(sample_data)
     if not isinstance(score, float):
         raise AssertionError("Silhouette score is not a float value")
+
+
+def test_fit_with_fewer_points_than_clusters():
+    X = np.random.rand(5, 3)  # 5 data points, 3 features
+    solver = KMeansSolver(n_clusters=10)
+    solver.fit(X)
+    if not solver:
+        raise AssertionError("Solver did not fit properly with fewer points than clusters")

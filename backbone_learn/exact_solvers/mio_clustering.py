@@ -1,7 +1,10 @@
+# Copyright (c) 2023 Vassilis Digalakis Jr, Christos Ziakas
+# Licensed under the MIT License.
+
 from typing import List, Optional, Tuple
 
 import numpy as np
-from pulp import PULP_CBC_CMD, LpBinary, LpMinimize, LpProblem, LpVariable, PulpSolverError, lpSum
+from pulp import PULP_CBC_CMD, LpBinary, LpMinimize, LpProblem, LpVariable, lpSum
 
 
 class MIOClustering:
@@ -189,10 +192,7 @@ class MIOClustering:
         solver = PULP_CBC_CMD(timeLimit=self.time_limit, warmStart=True)
 
         # Solve the problem
-        try:
-            self.model.solve(solver)
-        except PulpSolverError as e:
-            print("Solver encountered an error due to space complexity:", e)
+        self.model.solve(solver)
 
         self.y = np.zeros((num_points, self.n_clusters))
         self.z = np.zeros((num_points, num_points, self.n_clusters))

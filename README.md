@@ -5,7 +5,8 @@
 [![Paper](https://img.shields.io/badge/arXiv-2211.11747-red)](https://arxiv.org/abs/2311.13695)
 [![API](https://img.shields.io/website-up-down-green-red/http/monip.org.svg)](http://backbone-learn.readthedocs.io)
 [![PyPI package](https://badge.fury.io/py/backbone-learn.svg)](https://pypi.org/project/backbone-learn/)
-
+[![codecov](https://codecov.io/github/chziakas/backbone-learn/graph/badge.svg?token=XB32XVKLSB)](https://app.codecov.io/gh/chziakas/backbone-learn)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/6c042e62d2fa48d09bf58095c170410b)](https://app.codacy.com/gh/chziakas/backbone-learn/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 </div>
 

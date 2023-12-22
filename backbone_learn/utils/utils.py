@@ -20,15 +20,7 @@ class Utils:
         Returns:
         - np.ndarray: A numpy array containing the lowest `num_keep` values from the input array.
 
-        Raises:
-        - ValueError: If `num_keep` is larger than the size of `arr` or if `num_keep` is negative.
-
         """
-        if not (0 <= num_keep <= len(arr)):
-            raise ValueError(
-                "num_keep must be non-negative and less than or equal to the length of arr"
-            )
-
         indices_keep = np.argpartition(arr, num_keep)[:num_keep]
         mask = np.zeros(len(arr), dtype=bool)
         mask[indices_keep] = True

@@ -48,3 +48,18 @@ def test_subproblem_feature_selector_probability_distribution():
 
     if np.argmax(counts) != np.argmax(utilities):
         raise AssertionError("Probability distribution does not align with utility values")
+
+
+def test_compute_probability_distribution():
+    utilities = np.array([1, 2, 3, 4, 5])
+    expected_probabilities = np.exp(utilities / np.max(utilities) + 1)
+    expected_probabilities /= expected_probabilities.sum()
+
+    selector = SubproblemFeatureSelector(utilities, num_features_to_select=3)
+    computed_probabilities = selector.probability_distribution
+
+    if not np.allclose(computed_probabilities.sum(), 1):
+        raise AssertionError("Probabilities should sum up to 1")
+
+    if not np.allclose(computed_probabilities, expected_probabilities):
+        raise AssertionError("Computed probabilities do not match expected values")

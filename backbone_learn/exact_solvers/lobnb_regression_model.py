@@ -68,10 +68,5 @@ class L0BnBRegressionModel:
         Returns:
             np.ndarray: The predicted values.
 
-        Raises:
-            ValueError: If the model is not fitted (coefficients are None).
         """
-        if self.coefficients is not None:
-            return np.dot(X, self.coefficients) + self.intercept
-        else:
-            raise ValueError("Model has not been fitted yet. Coefficients are not set.")
+        return np.dot(X, self.coefficients) + self.intercept

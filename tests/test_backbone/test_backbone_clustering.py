@@ -1,6 +1,7 @@
 # Copyright (c) 2023 Vassilis Digalakis Jr, Christos Ziakas
 # Licensed under the MIT License.
 
+import numpy as np
 import pytest
 from sklearn.datasets import make_blobs
 
@@ -59,3 +60,15 @@ def test_kmeans_solver(sample_data):
     # Test WCSS
     if heuristic_model.wcss < 0:
         raise AssertionError("KMeans solver's WCSS is negative")
+
+
+def test_preprocessing_predict_without_assert(sample_data):
+    # Instantiate BackboneClustering class
+    backbone_model = BackboneClustering()
+
+    # Call preprocessing_predict method with sample data
+    processed_X = backbone_model.preprocessing_predict(sample_data)
+
+    # Check if the returned dataset is the same as the input
+    if not np.array_equal(processed_X, sample_data):
+        raise ValueError("preprocessing_predict should return the original dataset without changes")
